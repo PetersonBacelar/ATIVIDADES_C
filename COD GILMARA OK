@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlocked - American Visa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+            background-color: #1a2526;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            border: 2px solid #f5c518;
+            width: 90%;
+            max-width: 600px;
+            min-width: 320px;
+            margin: 1rem;
+        }
+
+        h1, h2, h3 {
+            color: #f5c518;
+            font-size: 1.5rem;
+        }
+
+        .options button, form button, .kanban-card button {
+            background-color: #f5c518;
+            color: black;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            margin: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            width: auto;
+            min-width: 150px;
+        }
+
+        .options button:hover, form button:hover, .kanban-card button:hover {
+            background-color: #e0b000;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        label {
+            text-align: left;
+            color: white;
+            font-size: 1rem;
+        }
+
+        input, select {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        p {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        p a {
+            color: #f5c518;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        .cliente-info, .etapa-info, .notificacoes-info {
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .kanban {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .kanban-column {
+            flex: 0 0 250px;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .kanban-column h3 {
+            margin: 0 0 1rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            text-align: center;
+            color: white;
+        }
+
+        /* Cores para cada coluna */
+        #novo-cadastro { background-color: #2c3e50; }
+        #novo-cadastro h3 { background-color: #34495e; }
+        #aguardando-envio { background-color: #2980b9; }
+        #aguardando-envio h3 { background-color: #3498db; }
+        #aguardando-analise { background-color: #8e44ad; }
+        #aguardando-analise h3 { background-color: #9b59b6; }
+        #analise-concluida { background-color: #d35400; }
+        #analise-concluida h3 { background-color: #e67e22; }
+        #aprovado { background-color: #27ae60; }
+        #aprovado h3 { background-color: #2ecc71; }
+        #rejeitado { background-color: #c0392b; }
+        #rejeitado h3 { background-color: #e74c3c; }
+
+        .kanban-card {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kanban-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .kanban-card p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+        }
+
+        .kanban-card button {
+            background-color: #f5c518;
+            color: black;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            min-width: 100px;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .kanban-card button:hover {
+            background-color: #e0b000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Media Queries para Responsividade */
+        @media (max-width: 600px) {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+                padding: 1rem;
+                width: 95%;
+                min-width: 280px;
+            }
+
+            h1, h2, h3 {
+                font-size: 1.2rem;
+            }
+
+            .options button, form button, .kanban-card button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+                min-width: 120px;
+            }
+
+            label, input, select, p {
+                font-size: 0.9rem;
+            }
+
+            .kanban-column {
+                flex: 0 0 200px;
+            }
+
+            .kanban-card p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+                width: 80%;
+                max-width: 700px;
+            }
+
+            h1, h2, h3 {
+                font-size: 1.4rem;
+            }
+
+            .options button, form button, .kanban-card button {
+                padding: 0.6rem 1.2rem;
+                font-size: 1rem;
+            }
+
+            label, input, select, p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+                width: 70%;
+                max-width: 800px;
+            }
+
+            h1, h2, h3 {
+                font-size: 1.6rem;
+            }
+
+            .options button, form button, .kanban-card button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1.1rem;
+            }
+
+            label, input, select, p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de Login (Página Inicial) -->
+    <div id="login" class="login-container">
+        <h1>Unlocked</h1>
+        <h2>American Visa</h2>
+        <form id="loginForm">
+            <label for="login-email">E-mail:</label>
+            <input type="email" id="login-email" name="email" required>
+            
+            <label for="login-password">Senha:</label>
+            <input type="password" id="login-password" name="password" required>
+            
+            <button type="submit">ENTRAR</button>
+        </form>
+        <p>Não possui cadastro? <a onclick="showPage('cadastro')">Cadastre-se</a></p>
+        <p><a onclick="showPage('admin-login')">Acessar como administrador</a></p>
+    </div>
+
+    <!-- Tela de Cadastro -->
+    <div id="cadastro" class="login-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Cadastro</h2>
+        <form id="cadastroForm">
+            <label for="cadastro-nome">Nome Completo:</label>
+            <input type="text" id="cadastro-nome" name="nome" required>
+            
+            <label for="cadastro-email">E-mail:</label>
+            <input type="email" id="cadastro-email" name="email" required>
+            
+            <label for="cadastro-telefone">Telefone:</label>
+            <input type="tel" id="cadastro-telefone" name="telefone" required>
+            
+            <label for="cadastro-password">Senha:</label>
+            <input type="password" id="cadastro-password" name="password" required>
+            
+            <button type="submit">CADASTRAR</button>
+        </form>
+        <p>Já tem conta? <a onclick="showPage('login')">Faça login aqui</a></p>
+    </div>
+
+    <!-- Tela de Login do Administrador -->
+    <div id="admin-login" class="login-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Admin Login</h2>
+        <form id="adminLoginForm">
+            <label for="admin-email">E-mail:</label>
+            <input type="email" id="admin-email" name="email" required>
+            
+            <label for="admin-password">Senha:</label>
+            <input type="password" id="admin-password" name="password" required>
+            
+            <button type="submit">ENTRAR</button>
+        </form>
+        <p><a onclick="showPage('login')">Voltar</a></p>
+    </div>
+
+    <!-- Área do Cliente -->
+    <div id="cliente" class="cliente-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Área do Cliente</h2>
+        <div class="cliente-info">
+            <h3>Dados Pessoais</h3>
+            <p><strong>Nome:</strong> <span id="cliente-nome"></span></p>
+            <p><strong>E-mail:</strong> <span id="cliente-email"></span></p>
+            <p><strong>Telefone:</strong> <span id="cliente-telefone"></span></p>
+        </div>
+        <div class="etapa-info">
+            <h3>Etapa Atual</h3>
+            <p><strong>Serviço Contratado:</strong> <span id="cliente-servico"></span></p>
+            <p><strong>Etapa:</strong> <span id="cliente-etapa"></span></p>
+        </div>
+        <div class="notificacoes-info">
+            <h3>Notificações</h3>
+            <ul id="cliente-notificacoes"></ul>
+        </div>
+        <button id="preencher-questionario-btn" onclick="showPage('questionario')">Preencher Questionário de Elegibilidade</button>
+        <button onclick="showPage('login')">Sair</button>
+    </div>
+
+    <!-- Tela do Questionário - Seção 1 (Informações Básicas) -->
+    <div id="questionario" class="questionario-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Questionário de Elegibilidade (Seção 1)</h2>
+        <h3>Informações Básicas</h3>
+        <form id="questionarioForm">
+            <label for="area-atuacao">Área de Atuação:</label>
+            <select id="area-atuacao" name="area-atuacao" required>
+                <option value="" disabled selected>Selecione uma área</option>
+                <option value="Ciencias">Ciências</option>
+                <option value="Artes">Artes</option>
+                <option value="Negocios">Negócios</option>
+                <option value="Saude">Saúde</option>
+                <option value="Tecnologia">Tecnologia</option>
+                <option value="Outros">Outros</option>
+            </select>
+
+            <label for="cargo-atual">Cargo Atual:</label>
+            <select id="cargo-atual" name="cargo-atual" required>
+                <option value="" disabled selected>Selecione um cargo</option>
+                <optgroup label="Níveis Hierárquicos">
+                    <option value="Operacional">Operacional</option>
+                    <option value="Tatico">Tático</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Coordenador">Coordenador</option>
+                    <option value="Gerente">Gerente</option>
+                    <option value="Diretor">Diretor</option>
+                    <option value="Estrategico">Estratégico (C-Level, ex.: CEO, CFO)</option>
+                </optgroup>
+                <optgroup label="Outros">
+                    <option value="Autonomo">Autônomo</option>
+                    <option value="Freelancer">Freelancer</option>
+                    <option value="Advogado">Advogado</option>
+                    <option value="Medico">Médico</option>
+                    <option value="Pesquisador">Pesquisador</option>
+                </optgroup>
+            </select>
+
+            <label for="formacao-academica">Formação Acadêmica:</label>
+            <select id="formacao-academica" name="formacao-academica" required>
+                <option value="" disabled selected>Selecione uma formação</option>
+                <option value="EnsinoFundamental">Ensino Fundamental</option>
+                <option value="EnsinoMedio">Ensino Médio</option>
+                <option value="Tecnico">Técnico</option>
+                <option value="Graduacao">Graduação</option>
+                <option value="PosGraduacao">Pós-graduação (Especialização)</option>
+                <option value="Mestrado">Mestrado</option>
+                <option value="Doutorado">Doutorado</option>
+                <option value="PosDoutorado">Pós-Doutorado</option>
+            </select>
+
+            <label for="area-formacao">No que você se formou?</label>
+            <input type="text" id="area-formacao" name="area-formacao" placeholder="Ex.: Engenharia, Medicina, Administração" required>
+
+            <button type="submit">PRÓXIMO</button>
+        </form>
+        <button onclick="showPage('cliente')">Voltar</button>
+    </div>
+
+    <!-- Tela do Questionário - Seção 2 (Prêmios e Reconhecimentos) -->
+    <div id="questionario-secao2" class="questionario-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Questionário de Elegibilidade (Seção 2)</h2>
+        <h3>Prêmios e Reconhecimentos</h3>
+        <form id="questionarioSecao2Form">
+            <label for="awards">Você recebeu prêmios ou reconhecimentos nacionais/internacionais significativos por excelência no seu campo?</label>
+            <select id="awards" name="awards" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="awards-docs" id="awards-docs-label" style="display: none;">Faça upload de comprovantes (ex.: certificados, reportagens):</label>
+            <input type="file" id="awards-docs" name="awards-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="professional-recognition">Você recebeu reconhecimentos profissionais (ex.: certificados de mérito, menções honrosas) de associações, empresas ou colegas de setor que atestem a qualidade do seu trabalho?</label>
+            <select id="professional-recognition" name="professional-recognition" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="professional-recognition-docs" id="professional-recognition-docs-label" style="display: none;">Faça upload de comprovantes (ex.: certificados, cartas de reconhecimento):</label>
+            <input type="file" id="professional-recognition-docs" name="professional-recognition-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <button type="submit">PRÓXIMO</button>
+        </form>
+        <button onclick="showPage('questionario')">Voltar</button>
+    </div>
+
+    <!-- Tela do Questionário - Seção 3 (Mídias e Publicações) -->
+    <div id="questionario-secao3" class="questionario-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Questionário de Elegibilidade (Seção 3)</h2>
+        <h3>Mídias e Publicações</h3>
+        <form id="questionarioSecao3Form">
+            <label for="media-publications">Existem publicações na mídia (jornais, revistas, TV) sobre suas conquistas, em veículos reconhecidos?</label>
+            <select id="media-publications" name="media-publications" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="media-publications-docs" id="media-publications-docs-label" style="display: none;">Faça upload de comprovantes (ex.: artigos, vídeos):</label>
+            <input type="file" id="media-publications-docs" name="media-publications-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="academic-publications">Você publicou artigos, livros ou relatórios em revistas ou jornais reconhecidos na sua área?</label>
+            <select id="academic-publications" name="academic-publications" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="academic-publications-docs" id="academic-publications-docs-label" style="display: none;">Faça upload de comprovantes (ex.: cópias dos artigos):</label>
+            <input type="file" id="academic-publications-docs" name="academic-publications-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <button type="submit">PRÓXIMO</button>
+        </form>
+        <button onclick="showPage('questionario-secao2')">Voltar</button>
+    </div>
+
+    <!-- Tela do Questionário - Seção 4 (Certificações e Associações) -->
+    <div id="questionario-secao4" class="questionario-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Questionário de Elegibilidade (Seção 4)</h2>
+        <h3>Certificações e Associações</h3>
+        <form id="questionarioSecao4Form">
+            <label for="license">Você possui uma licença ou certificação exigida para praticar sua profissão (ex.: COREN, CFP)?</label>
+            <select id="license" name="license" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="license-docs" id="license-docs-label" style="display: none;">Faça upload de comprovantes (ex.: registro no conselho de classe):</label>
+            <input type="file" id="license-docs" name="license-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="memberships">Você é membro de associações que exigem conquistas excepcionais para a admissão, julgadas por especialistas?</label>
+            <select id="memberships" name="memberships" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="memberships-docs" id="memberships-docs-label" style="display: none;">Faça upload de comprovantes (ex.: certificado de membresia, carta da associação):</label>
+            <input type="file" id="memberships-docs" name="memberships-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <button type="submit">PRÓXIMO</button>
+        </form>
+        <button onclick="showPage('questionario-secao3')">Voltar</button>
+    </div>
+
+    <!-- Tela do Questionário - Seção 5 (Experiência e Contribuições) -->
+    <div id="questionario-secao5" class="questionario-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Questionário de Elegibilidade (Seção 5)</h2>
+        <h3>Experiência e Contribuições</h3>
+        <form id="questionarioSecao5Form">
+            <label for="experience">Você tem pelo menos 10 anos de experiência em tempo integral na sua área de atuação?</label>
+            <select id="experience" name="experience" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="experience-docs" id="experience-docs-label" style="display: none;">Faça upload de comprovantes (ex.: cartas de empregadores, contratos):</label>
+            <input type="file" id="experience-docs" name="experience-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="contributions">Você criou um método, sistema, evento ou processo original (ex.: protocolo de análise, workshop inovador) que tenha sido adotado ou elogiado por colegas ou organizações da sua área?</label>
+            <select id="contributions" name="contributions" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="contributions-docs" id="contributions-docs-label" style="display: none;">Faça upload de comprovantes (ex.: patentes, relatórios, depoimentos):</label>
+            <input type="file" id="contributions-docs" name="contributions-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="other-evidence">Você possui outras evidências comparáveis que demonstrem habilidade excepcional (ex.: patentes, projetos impactantes)?</label>
+            <select id="other-evidence" name="other-evidence" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="other-evidence-docs" id="other-evidence-docs-label" style="display: none;">Faça upload de comprovantes (ex.: patentes, cartas de clientes):</label>
+            <input type="file" id="other-evidence-docs" name="other-evidence-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="exhibitions">Você apresentou seu trabalho em eventos relevantes do setor, como exposições de arte, feiras profissionais ou conferências científicas (ex.: simpósio reconhecido)?</label>
+            <select id="exhibitions" name="exhibitions" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="exhibitions-docs" id="exhibitions-docs-label" style="display: none;">Faça upload de comprovantes (ex.: programas, certificados de participação):</label>
+            <input type="file" id="exhibitions-docs" name="exhibitions-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <button type="submit">PRÓXIMO</button>
+        </form>
+        <button onclick="showPage('questionario-secao4')">Voltar</button>
+    </div>
+
+    <!-- Tela do Questionário - Seção 6 (Liderança e Avaliação) -->
+    <div id="questionario-secao6" class="questionario-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Questionário de Elegibilidade (Seção 6)</h2>
+        <h3>Liderança e Avaliação</h3>
+        <form id="questionarioSecao6Form">
+            <label for="judge">Você foi convidado para avaliar o trabalho de outros (ex.: jurado em competições, revisor de artigos, banca de TCC)?</label>
+            <select id="judge" name="judge" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="judge-docs" id="judge-docs-label" style="display: none;">Faça upload de comprovantes (ex.: convite, certificado):</label>
+            <input type="file" id="judge-docs" name="judge-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="leadership">Você desempenhou um papel de liderança ou crítico em organizações de prestígio (ex.: diretor, consultor-chave)?</label>
+            <select id="leadership" name="leadership" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="leadership-docs" id="leadership-docs-label" style="display: none;">Faça upload de comprovantes (ex.: carta da organização):</label>
+            <input type="file" id="leadership-docs" name="leadership-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <button type="submit">PRÓXIMO</button>
+        </form>
+        <button onclick="showPage('questionario-secao5')">Voltar</button>
+    </div>
+
+    <!-- Tela do Questionário - Seção 7 (Resultados Comerciais e Salário) -->
+    <div id="questionario-secao7" class="questionario-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Questionário de Elegibilidade (Seção 7)</h2>
+        <h3>Resultados Comerciais e Salário</h3>
+        <form id="questionarioSecao7Form">
+            <label for="high-salary">Você recebe um salário ou remuneração significativamente acima da média para sua profissão?</label>
+            <select id="high-salary" name="high-salary" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="high-salary-docs" id="high-salary-docs-label" style="display: none;">Faça upload de comprovantes (ex.: holerites, contratos):</label>
+            <input type="file" id="high-salary-docs" name="high-salary-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <label for="commercial-success">Você alcançou sucesso comercial nas artes (ex.: vendas significativas de ingressos, gravações)? (Apenas para artes)</label>
+            <select id="commercial-success" name="commercial-success" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="commercial-success-docs" id="commercial-success-docs-label" style="display: none;">Faça upload de comprovantes (ex.: relatórios de bilheteria):</label>
+            <input type="file" id="commercial-success-docs" name="commercial-success-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
+            <button type="submit">SALVAR E ENVIAR PARA ANÁLISE</button>
+        </form>
+        <button onclick="showPage('questionario-secao6')">Voltar</button>
+    </div>
+
+    <!-- Área do Administrador (Kanban) -->
+    <div id="admin" class="admin-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - CRM de Clientes</h2>
+        <div class="kanban">
+            <div class="kanban-column" id="novo-cadastro">
+                <h3>Novo Cadastro</h3>
+            </div>
+            <div class="kanban-column" id="aguardando-envio">
+                <h3>Aguardando Envio de Análise</h3>
+            </div>
+            <div class="kanban-column" id="aguardando-analise">
+                <h3>Aguardando Análise</h3>
+            </div>
+            <div class="kanban-column" id="analise-concluida">
+                <h3>Análise Concluída</h3>
+            </div>
+            <div class="kanban-column" id="aprovado">
+                <h3>Aprovado</h3>
+            </div>
+            <div class="kanban-column" id="rejeitado">
+                <h3>Rejeitado</h3>
+            </div>
+        </div>
+        <button onclick="showPage('login')">Sair</button>
+    </div>
+
+    <!-- Página de Detalhes do Cliente -->
+    <div id="cliente-detalhes" class="cliente-detalhes-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Detalhes do Cliente</h2>
+        <div class="cliente-info">
+            <h3>Dados Pessoais</h3>
+            <p><strong>Nome:</strong> <span id="detalhes-nome"></span></p>
+            <p><strong>E-mail:</strong> <span id="detalhes-email"></span></p>
+            <p><strong>Telefone:</strong> <span id="detalhes-telefone"></span></p>
+        </div>
+        <div class="etapa-info">
+            <h3>Elegibilidade</h3>
+            <p><strong>EB-2 NIW:</strong> <span id="detalhes-eb2niw"></span></p>
+            <p><strong>EB-1A:</strong> <span id="detalhes-eb1a"></span></p>
+            <p><strong>O-1A:</strong> <span id="detalhes-o1a"></span></p>
+        </div>
+        <div class="documentos-info">
+            <h3>Documentos Enviados</h3>
+            <ul id="detalhes-documentos"></ul>
+        </div>
+        <div class="historico-info">
+            <h3>Histórico de Interações</h3>
+            <ul id="detalhes-historico"></ul>
+        </div>
+        <div class="acoes">
+            <h3>Ações</h3>
+            <button id="concluir-analise-btn" onclick="concluirAnalise()">Concluir Análise</button>
+            <button id="aprovar-btn" onclick="aprovarCliente()">Aprovar</button>
+            <button id="rejeitar-btn" onclick="rejeitarCliente()">Rejeitar</button>
+        </div>
+        <button onclick="showPage('admin')">Voltar</button>
+    </div>
+
+    <script>
+        // Função para alternar entre as páginas
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container');
+            pages.forEach(page => page.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+        }
+
+        // Função para mostrar/esconder campos de upload com base na resposta
+        function toggleUploadField(selectId, labelId, inputId) {
+            const select = document.getElementById(selectId);
+            const label = document.getElementById(labelId);
+            const input = document.getElementById(inputId);
+
+            select.addEventListener('change', () => {
+                if (select.value === "Sim") {
+                    label.style.display = "block";
+                    input.style.display = "block";
+                    input.setAttribute("required", "required");
+                } else {
+                    label.style.display = "none";
+                    input.style.display = "none";
+                    input.removeAttribute("required");
+                    input.value = "";
+                }
+            });
+        }
+
+        // Simulação de banco de dados em localStorage
+        const clientes = JSON.parse(localStorage.getItem('clientes')) || [];
+        const adminCredentials = { email: "admin@unlocked.com", password: "admin123" };
+
+        // Função para salvar clientes no localStorage
+        function saveClientes() {
+            localStorage.setItem('clientes', JSON.stringify(clientes));
+        }
+
+        // Função para adicionar uma entrada ao histórico do cliente
+        function adicionarHistorico(clienteIndex, mensagem) {
+            const data = new Date().toLocaleString();
+            clientes[clienteIndex].historico.push(`${data}: ${mensagem}`);
+            saveClientes();
+        }
+
+        // Função para adicionar uma notificação ao cliente
+        function adicionarNotificacao(clienteIndex, mensagem) {
+            const data = new Date().toLocaleString();
+            clientes[clienteIndex].notificacoes.push(`${data}: ${mensagem}`);
+            saveClientes();
+        }
+
+        // Cadastro
+        const cadastroForm = document.getElementById('cadastroForm');
+        if (cadastroForm) {
+            cadastroForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const nome = document.getElementById('cadastro-nome').value;
+                const email = document.getElementById('cadastro-email').value;
+                const telefone = document.getElementById('cadastro-telefone').value;
+                const password = document.getElementById('cadastro-password').value;
+
+                const novoCliente = {
+                    nome,
+                    email,
+                    telefone,
+                    password,
+                    servico: "American Visa",
+                    etapa: "Novo Cadastro",
+                    areaAtuacao: "",
+                    cargoAtual: "",
+                    formacaoAcademica: "",
+                    areaFormacao: "",
+                    awards: "",
+                    professionalRecognition: "",
+                    memberships: "",
+                    mediaPublications: "",
+                    judge: "",
+                    contributions: "",
+                    academicPublications: "",
+                    exhibitions: "",
+                    leadership: "",
+                    highSalary: "",
+                    commercialSuccess: "",
+                    experience: "",
+                    license: "",
+                    otherEvidence: "",
+                    documents: [],
+                    eb2niwEligibility: "",
+                    eb1aEligibility: "",
+                    o1aEligibility: "",
+                    historico: [],
+                    notificacoes: []
+                };
+
+                clientes.push(novoCliente);
+                adicionarHistorico(clientes.length - 1, "Cliente cadastrado.");
+                adicionarNotificacao(clientes.length - 1, "Bem-vindo(a) ao Unlocked - American Visa! Por favor, preencha o questionário de elegibilidade.");
+                saveClientes();
+                localStorage.setItem('currentUser', JSON.stringify(novoCliente));
+                document.getElementById('cliente-nome').textContent = novoCliente.nome;
+                document.getElementById('cliente-email').textContent = novoCliente.email;
+                document.getElementById('cliente-telefone').textContent = novoCliente.telefone;
+                document.getElementById('cliente-servico').textContent = novoCliente.servico;
+                document.getElementById('cliente-etapa').textContent = novoCliente.etapa;
+                document.getElementById('preencher-questionario-btn').style.display = "block";
+
+                const notificacoesList = document.getElementById('cliente-notificacoes');
+                notificacoesList.innerHTML = '';
+                novoCliente.notificacoes.forEach(notificacao => {
+                    const li = document.createElement('li');
+                    li.textContent = notificacao;
+                    notificacoesList.appendChild(li);
+                });
+
+                alert('Cadastro realizado com sucesso!');
+                showPage('cliente');
+            });
+        }
+
+        // Login do Cliente
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+
+                const cliente = clientes.find(c => c.email === email && c.password === password);
+                if (cliente) {
+                    const clienteIndex = clientes.findIndex(c => c.email === email);
+                    localStorage.setItem('currentUser', JSON.stringify(cliente));
+                    document.getElementById('cliente-nome').textContent = cliente.nome;
+                    document.getElementById('cliente-email').textContent = cliente.email;
+                    document.getElementById('cliente-telefone').textContent = cliente.telefone;
+                    document.getElementById('cliente-servico').textContent = cliente.servico;
+                    document.getElementById('cliente-etapa').textContent = cliente.etapa;
+                    document.getElementById('preencher-questionario-btn').style.display = cliente.etapa === "Novo Cadastro" || cliente.etapa === "Aguardando Envio de Análise" ? "block" : "none";
+
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    cliente.notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+
+                    showPage('cliente');
+                } else {
+                    alert('E-mail ou senha incorretos!');
+                }
+            });
+        }
+
+        // Questionário - Seção 1 (Informações Básicas)
+        const questionarioForm = document.getElementById('questionarioForm');
+        if (questionarioForm) {
+            questionarioForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const areaAtuacao = document.getElementById('area-atuacao').value;
+                const cargoAtual = document.getElementById('cargo-atual').value;
+                const formacaoAcademica = document.getElementById('formacao-academica').value;
+                const areaFormacao = document.getElementById('area-formacao').value;
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
+
+                if (clienteIndex !== -1) {
+                    clientes[clienteIndex].areaAtuacao = areaAtuacao;
+                    clientes[clienteIndex].cargoAtual = cargoAtual;
+                    clientes[clienteIndex].formacaoAcademica = formacaoAcademica;
+                    clientes[clienteIndex].areaFormacao = areaFormacao;
+                    clientes[clienteIndex].etapa = "Aguardando Envio de Análise";
+                    adicionarHistorico(clienteIndex, "Cliente começou a preencher o questionário de elegibilidade.");
+                    saveClientes();
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+                    showPage('questionario-secao2');
+                }
+            });
+        }
+
+        // Questionário - Seção 2 (Prêmios e Reconhecimentos)
+        const questionarioSecao2Form = document.getElementById('questionarioSecao2Form');
+        if (questionarioSecao2Form) {
+            toggleUploadField('awards', 'awards-docs-label', 'awards-docs');
+            toggleUploadField('professional-recognition', 'professional-recognition-docs-label', 'professional-recognition-docs');
+            questionarioSecao2Form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const awards = document.getElementById('awards').value;
+                const professionalRecognition = document.getElementById('professional-recognition').value;
+
+                const formData = new FormData();
+                const awardsDocs = document.getElementById('awards-docs').files;
+                const professionalRecognitionDocs = document.getElementById('professional-recognition-docs').files;
+                for (let i = 0; i < awardsDocs.length; i++) {
+                    formData.append('awards-docs', awardsDocs[i]);
+                }
+                for (let i = 0; i < professionalRecognitionDocs.length; i++) {
+                    formData.append('professional-recognition-docs', professionalRecognitionDocs[i]);
+                }
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
+
+                if (clienteIndex !== -1) {
+                    clientes[clienteIndex].awards = awards;
+                    clientes[clienteIndex].professionalRecognition = professionalRecognition;
+                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
+                        Array.from(formData.getAll('awards-docs')).map(file => file.name),
+                        Array.from(formData.getAll('professional-recognition-docs')).map(file => file.name)
+                    );
+                    saveClientes();
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+                    showPage('questionario-secao3');
+                }
+            });
+        }
+
+        // Questionário - Seção 3 (Mídias e Publicações)
+        const questionarioSecao3Form = document.getElementById('questionarioSecao3Form');
+        if (questionarioSecao3Form) {
+            toggleUploadField('media-publications', 'media-publications-docs-label', 'media-publications-docs');
+            toggleUploadField('academic-publications', 'academic-publications-docs-label', 'academic-publications-docs');
+            questionarioSecao3Form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const mediaPublications = document.getElementById('media-publications').value;
+                const academicPublications = document.getElementById('academic-publications').value;
+
+                const formData = new FormData();
+                const mediaDocs = document.getElementById('media-publications-docs').files;
+                const academicDocs = document.getElementById('academic-publications-docs').files;
+                for (let i = 0; i < mediaDocs.length; i++) {
+                    formData.append('media-publications-docs', mediaDocs[i]);
+                }
+                for (let i = 0; i < academicDocs.length; i++) {
+                    formData.append('academic-publications-docs', academicDocs[i]);
+                }
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
+
+                if (clienteIndex !== -1) {
+                    clientes[clienteIndex].mediaPublications = mediaPublications;
+                    clientes[clienteIndex].academicPublications = academicPublications;
+                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
+                        Array.from(formData.getAll('media-publications-docs')).map(file => file.name),
+                        Array.from(formData.getAll('academic-publications-docs')).map(file => file.name)
+                    );
+                    saveClientes();
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+                    showPage('questionario-secao4');
+                }
+            });
+        }
+
+        // Questionário - Seção 4 (Certificações e Associações)
+        const questionarioSecao4Form = document.getElementById('questionarioSecao4Form');
+        if (questionarioSecao4Form) {
+            toggleUploadField('license', 'license-docs-label', 'license-docs');
+            toggleUploadField('memberships', 'memberships-docs-label', 'memberships-docs');
+            questionarioSecao4Form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const license = document.getElementById('license').value;
+                const memberships = document.getElementById('memberships').value;
+
+                const formData = new FormData();
+                const licenseDocs = document.getElementById('license-docs').files;
+                const membershipsDocs = document.getElementById('memberships-docs').files;
+                for (let i = 0; i < licenseDocs.length; i++) {
+                    formData.append('license-docs', licenseDocs[i]);
+                }
+                for (let i = 0; i < membershipsDocs.length; i++) {
+                    formData.append('memberships-docs', membershipsDocs[i]);
+                }
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
+
+                if (clienteIndex !== -1) {
+                    clientes[clienteIndex].license = license;
+                    clientes[clienteIndex].memberships = memberships;
+                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
+                        Array.from(formData.getAll('license-docs')).map(file => file.name),
+                        Array.from(formData.getAll('memberships-docs')).map(file => file.name)
+                    );
+                    saveClientes();
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+                    showPage('questionario-secao5');
+                }
+            });
+        }
+
+        // Questionário - Seção 5 (Experiência e Contribuições)
+        const questionarioSecao5Form = document.getElementById('questionarioSecao5Form');
+        if (questionarioSecao5Form) {
+            toggleUploadField('experience', 'experience-docs-label', 'experience-docs');
+            toggleUploadField('contributions', 'contributions-docs-label', 'contributions-docs');
+            toggleUploadField('other-evidence', 'other-evidence-docs-label', 'other-evidence-docs');
+            toggleUploadField('exhibitions', 'exhibitions-docs-label', 'exhibitions-docs');
+            questionarioSecao5Form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const experience = document.getElementById('experience').value;
+                const contributions = document.getElementById('contributions').value;
+                const otherEvidence = document.getElementById('other-evidence').value;
+                const exhibitions = document.getElementById('exhibitions').value;
+
+                const formData = new FormData();
+                const experienceDocs = document.getElementById('experience-docs').files;
+                const contributionsDocs = document.getElementById('contributions-docs').files;
+                const otherEvidenceDocs = document.getElementById('other-evidence-docs').files;
+                const exhibitionsDocs = document.getElementById('exhibitions-docs').files;
+                for (let i = 0; i < experienceDocs.length; i++) {
+                    formData.append('experience-docs', experienceDocs[i]);
+                }
+                for (let i = 0; i < contributionsDocs.length; i++) {
+                    formData.append('contributions-docs', contributionsDocs[i]);
+                }
+                for (let i = 0; i < otherEvidenceDocs.length; i++) {
+                    formData.append('other-evidence-docs', otherEvidenceDocs[i]);
+                }
+                for (let i = 0; i < exhibitionsDocs.length; i++) {
+                    formData.append('exhibitions-docs', exhibitionsDocs[i]);
+                }
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
+
+                if (clienteIndex !== -1) {
+                    clientes[clienteIndex].experience = experience;
+                    clientes[clienteIndex].contributions = contributions;
+                    clientes[clienteIndex].otherEvidence = otherEvidence;
+                    clientes[clienteIndex].exhibitions = exhibitions;
+                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
+                        Array.from(formData.getAll('experience-docs')).map(file => file.name),
+                        Array.from(formData.getAll('contributions-docs')).map(file => file.name),
+                        Array.from(formData.getAll('other-evidence-docs')).map(file => file.name),
+                        Array.from(formData.getAll('exhibitions-docs')).map(file => file.name)
+                    );
+                    saveClientes();
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+                    showPage('questionario-secao6');
+                }
+            });
+        }
+
+        // Questionário - Seção 6 (Liderança e Avaliação)
+        const questionarioSecao6Form = document.getElementById('questionarioSecao6Form');
+        if (questionarioSecao6Form) {
+            toggleUploadField('judge', 'judge-docs-label', 'judge-docs');
+            toggleUploadField('leadership', 'leadership-docs-label', 'leadership-docs');
+            questionarioSecao6Form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const judge = document.getElementById('judge').value;
+                const leadership = document.getElementById('leadership').value;
+
+                const formData = new FormData();
+                const judgeDocs = document.getElementById('judge-docs').files;
+                const leadershipDocs = document.getElementById('leadership-docs').files;
+                for (let i = 0; i < judgeDocs.length; i++) {
+                    formData.append('judge-docs', judgeDocs[i]);
+                }
+                for (let i = 0; i < leadershipDocs.length; i++) {
+                    formData.append('leadership-docs', leadershipDocs[i]);
+                }
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
+
+                if (clienteIndex !== -1) {
+                    clientes[clienteIndex].judge = judge;
+                    clientes[clienteIndex].leadership = leadership;
+                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
+                        Array.from(formData.getAll('judge-docs')).map(file => file.name),
+                        Array.from(formData.getAll('leadership-docs')).map(file => file.name)
+                    );
+                    saveClientes();
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+                    showPage('questionario-secao7');
+                }
+            });
+        }
+
+        // Questionário - Seção 7 (Resultados Comerciais e Salário)
+        const questionarioSecao7Form = document.getElementById('questionarioSecao7Form');
+        if (questionarioSecao7Form) {
+            toggleUploadField('high-salary', 'high-salary-docs-label', 'high-salary-docs');
+            toggleUploadField('commercial-success', 'commercial-success-docs-label', 'commercial-success-docs');
+            questionarioSecao7Form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const highSalary = document.getElementById('high-salary').value;
+                const commercialSuccess = document.getElementById('commercial-success').value;
+
+                const formData = new FormData();
+                const highSalaryDocs = document.getElementById('high-salary-docs').files;
+                const commercialSuccessDocs = document.getElementById('commercial-success-docs').files;
+                for (let i = 0; i < highSalaryDocs.length; i++) {
+                    formData.append('high-salary-docs', highSalaryDocs[i]);
+                }
+                for (let i = 0; i < commercialSuccessDocs.length; i++) {
+                    formData.append('commercial-success-docs', commercialSuccessDocs[i]);
+                }
+
+                // Simulação de envio para Google Cloud AI
+                try {
+                    alert('Documentos enviados para análise via Google Cloud AI (simulação).');
+                } catch (error) {
+                    console.error('Erro ao enviar documentos:', error);
+                    alert('Erro ao enviar documentos para análise (simulação).');
+                }
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
+
+                if (clienteIndex !== -1) {
+                    clientes[clienteIndex].highSalary = highSalary;
+                    clientes[clienteIndex].commercialSuccess = commercialSuccess;
+                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
+                        Array.from(formData.getAll('high-salary-docs')).map(file => file.name),
+                        Array.from(formData.getAll('commercial-success-docs')).map(file => file.name)
+                    );
+
+                    // Calcular pontuação para cada visto
+                    let eb2niwCriteria = 0;
+                    if (clientes[clienteIndex].awards === "Sim" || clientes[clienteIndex].professionalRecognition === "Sim") eb2niwCriteria++; // Prêmios ou reconhecimentos
+                    if (clientes[clienteIndex].memberships === "Sim") eb2niwCriteria++;
+                    if (clientes[clienteIndex].highSalary === "Sim") eb2niwCriteria++;
+                    if (clientes[clienteIndex].experience === "Sim") eb2niwCriteria++;
+                    if (clientes[clienteIndex].license === "Sim") eb2niwCriteria++;
+                    if (clientes[clienteIndex].otherEvidence === "Sim") eb2niwCriteria++;
+                    if (clientes[clienteIndex].formacaoAcademica !== "EnsinoFundamental" && clientes[clienteIndex].formacaoAcademica !== "EnsinoMedio") eb2niwCriteria++;
+                    clientes[clienteIndex].eb2niwEligibility = `Cumpre ${eb2niwCriteria}/7 critérios objetivos`;
+
+                    let eb1aCriteria = 0;
+                    if (clientes[clienteIndex].awards === "Sim" || clientes[clienteIndex].professionalRecognition === "Sim") eb1aCriteria++; // Prêmios ou reconhecimentos
+                    if (clientes[clienteIndex].memberships === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].mediaPublications === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].judge === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].contributions === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].academicPublications === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].exhibitions === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].leadership === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].highSalary === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].commercialSuccess === "Sim") eb1aCriteria++;
+                    clientes[clienteIndex].eb1aEligibility = `Cumpre ${eb1aCriteria}/10 critérios objetivos`;
+
+                    let o1aCriteria = 0;
+                    if (clientes[clienteIndex].awards === "Sim" || clientes[clienteIndex].professionalRecognition === "Sim") o1aCriteria++; // Prêmios ou reconhecimentos
+                    if (clientes[clienteIndex].memberships === "Sim") o1aCriteria++;
+                    if (clientes[clienteIndex].mediaPublications === "Sim") o1aCriteria++;
+                    if (clientes[clienteIndex].judge === "Sim") o1aCriteria++;
+                    if (clientes[clienteIndex].contributions === "Sim") o1aCriteria++;
+                    if (clientes[clienteIndex].academicPublications === "Sim") o1aCriteria++;
+                    if (clientes[clienteIndex].leadership === "Sim") o1aCriteria++;
+                    if (clientes[clienteIndex].highSalary === "Sim") o1aCriteria++;
+                    clientes[clienteIndex].o1aEligibility = `Cumpre ${o1aCriteria}/8 critérios objetivos`;
+
+                    // Atualizar o status do cliente
+                    clientes[clienteIndex].etapa = "Aguardando Análise";
+                    adicionarHistorico(clienteIndex, "Questionário enviado para análise.");
+                    adicionarNotificacao(clienteIndex, "Seu questionário foi enviado e está aguardando análise pela consultoria.");
+
+                    saveClientes();
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+
+                    // Atualizar a página do cliente
+                    document.getElementById('cliente-nome').textContent = clientes[clienteIndex].nome;
+                    document.getElementById('cliente-email').textContent = clientes[clienteIndex].email;
+                    document.getElementById('cliente-telefone').textContent = clientes[clienteIndex].telefone;
+                    document.getElementById('cliente-servico').textContent = clientes[clienteIndex].servico;
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndex].etapa;
+                    document.getElementById('preencher-questionario-btn').style.display = "none";
+
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndex].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+
+                    alert(`Dados salvos com sucesso!\n\nResultados de Elegibilidade (Critérios Objetivos):\n- EB-2 NIW: ${clientes[clienteIndex].eb2niwEligibility}\n- EB-1A: ${clientes[clienteIndex].eb1aEligibility}\n- O-1A: ${clientes[clienteIndex].o1aEligibility}`);
+                    showPage('cliente');
+                }
+            });
+        }
+
+        // Login do Administrador
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        if (adminLoginForm) {
+            adminLoginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('admin-email').value;
+                const password = document.getElementById('admin-password').value;
+
+                if (email === adminCredentials.email && password === adminCredentials.password) {
+                    const novoCadastroColumn = document.getElementById('novo-cadastro');
+                    const aguardandoEnvioColumn = document.getElementById('aguardando-envio');
+                    const aguardandoAnaliseColumn = document.getElementById('aguardando-analise');
+                    const analiseConcluidaColumn = document.getElementById('analise-concluida');
+                    const aprovadoColumn = document.getElementById('aprovado');
+                    const rejeitadoColumn = document.getElementById('rejeitado');
+
+                    novoCadastroColumn.innerHTML = '<h3>Novo Cadastro</h3>';
+                    aguardandoEnvioColumn.innerHTML = '<h3>Aguardando Envio de Análise</h3>';
+                    aguardandoAnaliseColumn.innerHTML = '<h3>Aguardando Análise</h3>';
+                    analiseConcluidaColumn.innerHTML = '<h3>Análise Concluída</h3>';
+                    aprovadoColumn.innerHTML = '<h3>Aprovado</h3>';
+                    rejeitadoColumn.innerHTML = '<h3>Rejeitado</h3>';
+
+                    clientes.forEach((cliente, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'kanban-card';
+                        card.innerHTML = `
+                            <p><strong>Nome:</strong> ${cliente.nome}</p>
+                            <p><strong>E-mail:</strong> ${cliente.email}</p>
+                            <button onclick="showClienteDetalhes(${index})">Ver Detalhes</button>
+                        `;
+
+                        if (cliente.etapa === "Novo Cadastro") {
+                            novoCadastroColumn.appendChild(card);
+                        } else if (cliente.etapa === "Aguardando Envio de Análise") {
+                            aguardandoEnvioColumn.appendChild(card);
+                        } else if (cliente.etapa === "Aguardando Análise") {
+                            aguardandoAnaliseColumn.appendChild(card);
+                        } else if (cliente.etapa === "Análise Concluída") {
+                            analiseConcluidaColumn.appendChild(card);
+                        } else if (cliente.etapa === "Aprovado") {
+                            aprovadoColumn.appendChild(card);
+                        } else if (cliente.etapa === "Rejeitado") {
+                            rejeitadoColumn.appendChild(card);
+                        }
+                    });
+
+                    showPage('admin');
+                } else {
+                    alert('Credenciais de administrador incorretas!');
+                }
+            });
+        }
+
+        // Função para exibir os detalhes do cliente
+        let clienteIndexAtual = null;
+
+        function showClienteDetalhes(clienteIndex) {
+            clienteIndexAtual = clienteIndex;
+            const cliente = clientes[clienteIndex];
+            document.getElementById('detalhes-nome').textContent = cliente.nome;
+            document.getElementById('detalhes-email').textContent = cliente.email;
+            document.getElementById('detalhes-telefone').textContent = cliente.telefone;
+            document.getElementById('detalhes-eb2niw').textContent = cliente.eb2niwEligibility || "Não avaliado";
+            document.getElementById('detalhes-eb1a').textContent = cliente.eb1aEligibility || "Não avaliado";
+            document.getElementById('detalhes-o1a').textContent = cliente.o1aEligibility || "Não avaliado";
+
+            const documentosList = document.getElementById('detalhes-documentos');
+            documentosList.innerHTML = '';
+            if (cliente.documents && cliente.documents.length > 0) {
+                cliente.documents.forEach(doc => {
+                    const li = document.createElement('li');
+                    li.textContent = doc;
+                    documentosList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = "Nenhum documento enviado.";
+                documentosList.appendChild(li);
+            }
+
+            const historicoList = document.getElementById('detalhes-historico');
+            historicoList.innerHTML = '';
+            if (cliente.historico && cliente.historico.length > 0) {
+                cliente.historico.forEach(h => {
+                    const li = document.createElement('li');
+                    li.textContent = h;
+                    historicoList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = "Nenhum histórico registrado.";
+                historicoList.appendChild(li);
+            }
+
+            // Mostrar/esconder botões de ações com base no status
+            const concluirAnaliseBtn = document.getElementById('concluir-analise-btn');
+            const aprovarBtn = document.getElementById('aprovar-btn');
+            const rejeitarBtn = document.getElementById('rejeitar-btn');
+
+            if (cliente.etapa === "Aguardando Análise") {
+                concluirAnaliseBtn.style.display = "block";
+                aprovarBtn.style.display = "none";
+                rejeitarBtn.style.display = "none";
+            } else if (cliente.etapa === "Análise Concluída") {
+                concluirAnaliseBtn.style.display = "none";
+                aprovarBtn.style.display = "block";
+                rejeitarBtn.style.display = "block";
+            } else {
+                concluirAnaliseBtn.style.display = "none";
+                aprovarBtn.style.display = "none";
+                rejeitarBtn.style.display = "none";
+            }
+
+            showPage('cliente-detalhes');
+        }
+
+        // Função para concluir a análise
+        function concluirAnalise() {
+            if (clienteIndexAtual !== null) {
+                clientes[clienteIndexAtual].etapa = "Análise Concluída";
+                adicionarHistorico(clienteIndexAtual, "Análise concluída pela consultoria.");
+                adicionarNotificacao(clienteIndexAtual, "Sua análise foi concluída! Aguarde a decisão final.");
+                saveClientes();
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser.email === clientes[clienteIndexAtual].email) {
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+                }
+
+                showClienteDetalhes(clienteIndexAtual);
+            }
+        }
+
+        // Função para aprovar o cliente
+        function aprovarCliente() {
+            if (clienteIndexAtual !== null) {
+                clientes[clienteIndexAtual].etapa = "Aprovado";
+                adicionarHistorico(clienteIndexAtual, "Cliente aprovado para o visto.");
+                adicionarNotificacao(clienteIndexAtual, "Parabéns! Seu pedido foi aprovado para o visto!");
+                saveClientes();
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser.email === clientes[clienteIndexAtual].email) {
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+                }
+
+                showClienteDetalhes(clienteIndexAtual);
+            }
+        }
+
+        // Função para rejeitar o cliente
+        function rejeitarCliente() {
+            if (clienteIndexAtual !== null) {
+                clientes[clienteIndexAtual].etapa = "Rejeitado";
+                adicionarHistorico(clienteIndexAtual, "Cliente rejeitado para o visto.");
+                adicionarNotificacao(clienteIndexAtual, "Infelizmente, seu pedido foi rejeitado. Entre em contato para mais detalhes.");
+                saveClientes();
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser.email === clientes[clienteIndexAtual].email) {
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+                }
+
+                showClienteDetalhes(clienteIndexAtual);
+            }
+        }
+    </script>
+</body>
+</html>
