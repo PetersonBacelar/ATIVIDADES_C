@@ -16,7 +16,7 @@
             min-height: 100vh;
         }
 
-        .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+        .container, .login-container, .cliente-container, .admin-container, .questionario-container {
             background-color: #1a2526;
             padding: 2rem;
             border-radius: 10px;
@@ -35,7 +35,7 @@
             font-size: 1.5rem;
         }
 
-        .options button, form button, .kanban-card button {
+        .options button, form button {
             background-color: #f5c518;
             color: black;
             padding: 0.75rem 1.5rem;
@@ -48,7 +48,7 @@
             min-width: 150px;
         }
 
-        .options button:hover, form button:hover, .kanban-card button:hover {
+        .options button:hover, form button:hover {
             background-color: #e0b000;
         }
 
@@ -90,82 +90,28 @@
             text-decoration: underline;
         }
 
-        .cliente-info, .etapa-info, .notificacoes-info {
+        .cliente-info, .etapa-info {
             margin: 1rem 0;
             text-align: left;
         }
 
-        .kanban {
-            display: flex;
-            overflow-x: auto;
-            gap: 1rem;
-            padding: 1rem;
+        table {
             width: 100%;
-            box-sizing: border-box;
-        }
-
-        .kanban-column {
-            flex: 0 0 250px;
-            border-radius: 8px;
-            padding: 1rem;
-            min-height: 300px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .kanban-column h3 {
-            margin: 0 0 1rem 0;
-            padding: 0.5rem;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            text-align: center;
-            color: white;
-        }
-
-        /* Cores para cada coluna */
-        #novo-cadastro { background-color: #2c3e50; }
-        #novo-cadastro h3 { background-color: #34495e; }
-        #aguardando-envio { background-color: #2980b9; }
-        #aguardando-envio h3 { background-color: #3498db; }
-        #aguardando-analise { background-color: #8e44ad; }
-        #aguardando-analise h3 { background-color: #9b59b6; }
-        #analise-concluida { background-color: #d35400; }
-        #analise-concluida h3 { background-color: #e67e22; }
-        #aprovado { background-color: #27ae60; }
-        #aprovado h3 { background-color: #2ecc71; }
-        #rejeitado { background-color: #c0392b; }
-        #rejeitado h3 { background-color: #e74c3c; }
-
-        .kanban-card {
-            background-color: #ffffff;
-            color: #333;
-            border-radius: 8px;
-            padding: 0.75rem;
-            margin-bottom: 0.75rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .kanban-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .kanban-card p {
-            margin: 0.3rem 0;
+            border-collapse: collapse;
+            margin: 1rem 0;
             font-size: 0.9rem;
         }
 
-        .kanban-card button {
+        th, td {
+            padding: 0.5rem;
+            border: 1px solid #f5c518;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        th {
             background-color: #f5c518;
             color: black;
-            padding: 0.5rem;
-            font-size: 0.9rem;
-            min-width: 100px;
-            margin: 0.5rem 0 0 0;
-        }
-
-        .kanban-card button:hover {
-            background-color: #e0b000;
         }
 
         .hidden {
@@ -174,7 +120,7 @@
 
         /* Media Queries para Responsividade */
         @media (max-width: 600px) {
-            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container {
                 padding: 1rem;
                 width: 95%;
                 min-width: 280px;
@@ -184,7 +130,7 @@
                 font-size: 1.2rem;
             }
 
-            .options button, form button, .kanban-card button {
+            .options button, form button {
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
                 min-width: 120px;
@@ -194,17 +140,17 @@
                 font-size: 0.9rem;
             }
 
-            .kanban-column {
-                flex: 0 0 200px;
+            table {
+                font-size: 0.8rem;
             }
 
-            .kanban-card p {
-                font-size: 0.8rem;
+            th, td {
+                padding: 0.3rem;
             }
         }
 
         @media (min-width: 601px) and (max-width: 1024px) {
-            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container {
                 width: 80%;
                 max-width: 700px;
             }
@@ -213,7 +159,7 @@
                 font-size: 1.4rem;
             }
 
-            .options button, form button, .kanban-card button {
+            .options button, form button {
                 padding: 0.6rem 1.2rem;
                 font-size: 1rem;
             }
@@ -221,10 +167,14 @@
             label, input, select, p {
                 font-size: 1rem;
             }
+
+            table {
+                font-size: 0.9rem;
+            }
         }
 
         @media (min-width: 1025px) {
-            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container {
                 width: 70%;
                 max-width: 800px;
             }
@@ -233,13 +183,17 @@
                 font-size: 1.6rem;
             }
 
-            .options button, form button, .kanban-card button {
+            .options button, form button {
                 padding: 0.75rem 1.5rem;
                 font-size: 1.1rem;
             }
 
             label, input, select, p {
                 font-size: 1.1rem;
+            }
+
+            table {
+                font-size: 1rem;
             }
         }
     </style>
@@ -315,11 +269,7 @@
             <p><strong>Serviço Contratado:</strong> <span id="cliente-servico"></span></p>
             <p><strong>Etapa:</strong> <span id="cliente-etapa"></span></p>
         </div>
-        <div class="notificacoes-info">
-            <h3>Notificações</h3>
-            <ul id="cliente-notificacoes"></ul>
-        </div>
-        <button id="preencher-questionario-btn" onclick="showPage('questionario')">Preencher Questionário de Elegibilidade</button>
+        <button onclick="showPage('questionario')">Preencher Questionário de Elegibilidade</button>
         <button onclick="showPage('login')">Sair</button>
     </div>
 
@@ -396,15 +346,6 @@
             </select>
             <label for="awards-docs" id="awards-docs-label" style="display: none;">Faça upload de comprovantes (ex.: certificados, reportagens):</label>
             <input type="file" id="awards-docs" name="awards-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
-
-            <label for="professional-recognition">Você recebeu reconhecimentos profissionais (ex.: certificados de mérito, menções honrosas) de associações, empresas ou colegas de setor que atestem a qualidade do seu trabalho?</label>
-            <select id="professional-recognition" name="professional-recognition" required>
-                <option value="" disabled selected>Selecione uma opção</option>
-                <option value="Sim">Sim</option>
-                <option value="Nao">Não</option>
-            </select>
-            <label for="professional-recognition-docs" id="professional-recognition-docs-label" style="display: none;">Faça upload de comprovantes (ex.: certificados, cartas de reconhecimento):</label>
-            <input type="file" id="professional-recognition-docs" name="professional-recognition-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
 
             <button type="submit">PRÓXIMO</button>
         </form>
@@ -484,7 +425,7 @@
             <label for="experience-docs" id="experience-docs-label" style="display: none;">Faça upload de comprovantes (ex.: cartas de empregadores, contratos):</label>
             <input type="file" id="experience-docs" name="experience-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
 
-            <label for="contributions">Você criou um método, sistema, evento ou processo original (ex.: protocolo de análise, workshop inovador) que tenha sido adotado ou elogiado por colegas ou organizações da sua área?</label>
+            <label for="contributions">Você fez contribuições originais de grande importância no seu campo (ex.: inovações, métodos, patentes)?</label>
             <select id="contributions" name="contributions" required>
                 <option value="" disabled selected>Selecione uma opção</option>
                 <option value="Sim">Sim</option>
@@ -501,15 +442,6 @@
             </select>
             <label for="other-evidence-docs" id="other-evidence-docs-label" style="display: none;">Faça upload de comprovantes (ex.: patentes, cartas de clientes):</label>
             <input type="file" id="other-evidence-docs" name="other-evidence-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
-
-            <label for="exhibitions">Você apresentou seu trabalho em eventos relevantes do setor, como exposições de arte, feiras profissionais ou conferências científicas (ex.: simpósio reconhecido)?</label>
-            <select id="exhibitions" name="exhibitions" required>
-                <option value="" disabled selected>Selecione uma opção</option>
-                <option value="Sim">Sim</option>
-                <option value="Nao">Não</option>
-            </select>
-            <label for="exhibitions-docs" id="exhibitions-docs-label" style="display: none;">Faça upload de comprovantes (ex.: programas, certificados de participação):</label>
-            <input type="file" id="exhibitions-docs" name="exhibitions-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
 
             <button type="submit">PRÓXIMO</button>
         </form>
@@ -560,6 +492,15 @@
             <label for="high-salary-docs" id="high-salary-docs-label" style="display: none;">Faça upload de comprovantes (ex.: holerites, contratos):</label>
             <input type="file" id="high-salary-docs" name="high-salary-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
 
+            <label for="artistic-exhibitions">Você exibiu seus trabalhos em eventos artísticos renomados (ex.: Carnegie Hall, Festival de Cannes)? (Apenas para artes)</label>
+            <select id="artistic-exhibitions" name="artistic-exhibitions" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Nao">Não</option>
+            </select>
+            <label for="artistic-exhibitions-docs" id="artistic-exhibitions-docs-label" style="display: none;">Faça upload de comprovantes (ex.: programas, cartazes):</label>
+            <input type="file" id="artistic-exhibitions-docs" name="artistic-exhibitions-docs" accept=".pdf,.jpg,.png" multiple style="display: none;" required>
+
             <label for="commercial-success">Você alcançou sucesso comercial nas artes (ex.: vendas significativas de ingressos, gravações)? (Apenas para artes)</label>
             <select id="commercial-success" name="commercial-success" required>
                 <option value="" disabled selected>Selecione uma opção</option>
@@ -574,70 +515,36 @@
         <button onclick="showPage('questionario-secao6')">Voltar</button>
     </div>
 
-    <!-- Área do Administrador (Kanban) -->
+    <!-- Área do Administrador -->
     <div id="admin" class="admin-container hidden">
         <h1>Unlocked</h1>
-        <h2>American Visa - CRM de Clientes</h2>
-        <div class="kanban">
-            <div class="kanban-column" id="novo-cadastro">
-                <h3>Novo Cadastro</h3>
-            </div>
-            <div class="kanban-column" id="aguardando-envio">
-                <h3>Aguardando Envio de Análise</h3>
-            </div>
-            <div class="kanban-column" id="aguardando-analise">
-                <h3>Aguardando Análise</h3>
-            </div>
-            <div class="kanban-column" id="analise-concluida">
-                <h3>Análise Concluída</h3>
-            </div>
-            <div class="kanban-column" id="aprovado">
-                <h3>Aprovado</h3>
-            </div>
-            <div class="kanban-column" id="rejeitado">
-                <h3>Rejeitado</h3>
-            </div>
-        </div>
+        <h2>American Visa - Área do Administrador</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Serviço Contratado</th>
+                    <th>Etapa</th>
+                    <th>Área de Atuação</th>
+                    <th>Cargo Atual</th>
+                    <th>Formação Acadêmica</th>
+                    <th>Área de Formação</th>
+                    <th>Elegibilidade EB-2 NIW</th>
+                    <th>Elegibilidade EB-1A</th>
+                    <th>Elegibilidade O-1A</th>
+                </tr>
+            </thead>
+            <tbody id="clientesTable"></tbody>
+        </table>
         <button onclick="showPage('login')">Sair</button>
-    </div>
-
-    <!-- Página de Detalhes do Cliente -->
-    <div id="cliente-detalhes" class="cliente-detalhes-container hidden">
-        <h1>Unlocked</h1>
-        <h2>American Visa - Detalhes do Cliente</h2>
-        <div class="cliente-info">
-            <h3>Dados Pessoais</h3>
-            <p><strong>Nome:</strong> <span id="detalhes-nome"></span></p>
-            <p><strong>E-mail:</strong> <span id="detalhes-email"></span></p>
-            <p><strong>Telefone:</strong> <span id="detalhes-telefone"></span></p>
-        </div>
-        <div class="etapa-info">
-            <h3>Elegibilidade</h3>
-            <p><strong>EB-2 NIW:</strong> <span id="detalhes-eb2niw"></span></p>
-            <p><strong>EB-1A:</strong> <span id="detalhes-eb1a"></span></p>
-            <p><strong>O-1A:</strong> <span id="detalhes-o1a"></span></p>
-        </div>
-        <div class="documentos-info">
-            <h3>Documentos Enviados</h3>
-            <ul id="detalhes-documentos"></ul>
-        </div>
-        <div class="historico-info">
-            <h3>Histórico de Interações</h3>
-            <ul id="detalhes-historico"></ul>
-        </div>
-        <div class="acoes">
-            <h3>Ações</h3>
-            <button id="concluir-analise-btn" onclick="concluirAnalise()">Concluir Análise</button>
-            <button id="aprovar-btn" onclick="aprovarCliente()">Aprovar</button>
-            <button id="rejeitar-btn" onclick="rejeitarCliente()">Rejeitar</button>
-        </div>
-        <button onclick="showPage('admin')">Voltar</button>
     </div>
 
     <script>
         // Função para alternar entre as páginas
         function showPage(pageId) {
-            const pages = document.querySelectorAll('.container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container');
+            const pages = document.querySelectorAll('.container, .login-container, .cliente-container, .admin-container, .questionario-container');
             pages.forEach(page => page.classList.add('hidden'));
             document.getElementById(pageId).classList.remove('hidden');
         }
@@ -657,7 +564,7 @@
                     label.style.display = "none";
                     input.style.display = "none";
                     input.removeAttribute("required");
-                    input.value = "";
+                    input.value = ""; // Limpa o campo se a resposta for "Não"
                 }
             });
         }
@@ -669,20 +576,6 @@
         // Função para salvar clientes no localStorage
         function saveClientes() {
             localStorage.setItem('clientes', JSON.stringify(clientes));
-        }
-
-        // Função para adicionar uma entrada ao histórico do cliente
-        function adicionarHistorico(clienteIndex, mensagem) {
-            const data = new Date().toLocaleString();
-            clientes[clienteIndex].historico.push(`${data}: ${mensagem}`);
-            saveClientes();
-        }
-
-        // Função para adicionar uma notificação ao cliente
-        function adicionarNotificacao(clienteIndex, mensagem) {
-            const data = new Date().toLocaleString();
-            clientes[clienteIndex].notificacoes.push(`${data}: ${mensagem}`);
-            saveClientes();
         }
 
         // Cadastro
@@ -701,36 +594,28 @@
                     telefone,
                     password,
                     servico: "American Visa",
-                    etapa: "Novo Cadastro",
+                    etapa: "Iniciado",
                     areaAtuacao: "",
                     cargoAtual: "",
                     formacaoAcademica: "",
                     areaFormacao: "",
                     awards: "",
-                    professionalRecognition: "",
                     memberships: "",
                     mediaPublications: "",
                     judge: "",
                     contributions: "",
                     academicPublications: "",
-                    exhibitions: "",
+                    artisticExhibitions: "",
                     leadership: "",
                     highSalary: "",
                     commercialSuccess: "",
                     experience: "",
                     license: "",
                     otherEvidence: "",
-                    documents: [],
-                    eb2niwEligibility: "",
-                    eb1aEligibility: "",
-                    o1aEligibility: "",
-                    historico: [],
-                    notificacoes: []
+                    documents: []
                 };
 
                 clientes.push(novoCliente);
-                adicionarHistorico(clientes.length - 1, "Cliente cadastrado.");
-                adicionarNotificacao(clientes.length - 1, "Bem-vindo(a) ao Unlocked - American Visa! Por favor, preencha o questionário de elegibilidade.");
                 saveClientes();
                 localStorage.setItem('currentUser', JSON.stringify(novoCliente));
                 document.getElementById('cliente-nome').textContent = novoCliente.nome;
@@ -738,16 +623,6 @@
                 document.getElementById('cliente-telefone').textContent = novoCliente.telefone;
                 document.getElementById('cliente-servico').textContent = novoCliente.servico;
                 document.getElementById('cliente-etapa').textContent = novoCliente.etapa;
-                document.getElementById('preencher-questionario-btn').style.display = "block";
-
-                const notificacoesList = document.getElementById('cliente-notificacoes');
-                notificacoesList.innerHTML = '';
-                novoCliente.notificacoes.forEach(notificacao => {
-                    const li = document.createElement('li');
-                    li.textContent = notificacao;
-                    notificacoesList.appendChild(li);
-                });
-
                 alert('Cadastro realizado com sucesso!');
                 showPage('cliente');
             });
@@ -763,23 +638,12 @@
 
                 const cliente = clientes.find(c => c.email === email && c.password === password);
                 if (cliente) {
-                    const clienteIndex = clientes.findIndex(c => c.email === email);
                     localStorage.setItem('currentUser', JSON.stringify(cliente));
                     document.getElementById('cliente-nome').textContent = cliente.nome;
                     document.getElementById('cliente-email').textContent = cliente.email;
                     document.getElementById('cliente-telefone').textContent = cliente.telefone;
                     document.getElementById('cliente-servico').textContent = cliente.servico;
                     document.getElementById('cliente-etapa').textContent = cliente.etapa;
-                    document.getElementById('preencher-questionario-btn').style.display = cliente.etapa === "Novo Cadastro" || cliente.etapa === "Aguardando Envio de Análise" ? "block" : "none";
-
-                    const notificacoesList = document.getElementById('cliente-notificacoes');
-                    notificacoesList.innerHTML = '';
-                    cliente.notificacoes.forEach(notificacao => {
-                        const li = document.createElement('li');
-                        li.textContent = notificacao;
-                        notificacoesList.appendChild(li);
-                    });
-
                     showPage('cliente');
                 } else {
                     alert('E-mail ou senha incorretos!');
@@ -805,8 +669,6 @@
                     clientes[clienteIndex].cargoAtual = cargoAtual;
                     clientes[clienteIndex].formacaoAcademica = formacaoAcademica;
                     clientes[clienteIndex].areaFormacao = areaFormacao;
-                    clientes[clienteIndex].etapa = "Aguardando Envio de Análise";
-                    adicionarHistorico(clienteIndex, "Cliente começou a preencher o questionário de elegibilidade.");
                     saveClientes();
                     localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
                     showPage('questionario-secao2');
@@ -818,20 +680,14 @@
         const questionarioSecao2Form = document.getElementById('questionarioSecao2Form');
         if (questionarioSecao2Form) {
             toggleUploadField('awards', 'awards-docs-label', 'awards-docs');
-            toggleUploadField('professional-recognition', 'professional-recognition-docs-label', 'professional-recognition-docs');
             questionarioSecao2Form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const awards = document.getElementById('awards').value;
-                const professionalRecognition = document.getElementById('professional-recognition').value;
 
                 const formData = new FormData();
                 const awardsDocs = document.getElementById('awards-docs').files;
-                const professionalRecognitionDocs = document.getElementById('professional-recognition-docs').files;
                 for (let i = 0; i < awardsDocs.length; i++) {
                     formData.append('awards-docs', awardsDocs[i]);
-                }
-                for (let i = 0; i < professionalRecognitionDocs.length; i++) {
-                    formData.append('professional-recognition-docs', professionalRecognitionDocs[i]);
                 }
 
                 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -839,11 +695,7 @@
 
                 if (clienteIndex !== -1) {
                     clientes[clienteIndex].awards = awards;
-                    clientes[clienteIndex].professionalRecognition = professionalRecognition;
-                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
-                        Array.from(formData.getAll('awards-docs')).map(file => file.name),
-                        Array.from(formData.getAll('professional-recognition-docs')).map(file => file.name)
-                    );
+                    clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(Array.from(formData.getAll('awards-docs')).map(file => file.name));
                     saveClientes();
                     localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
                     showPage('questionario-secao3');
@@ -931,19 +783,16 @@
             toggleUploadField('experience', 'experience-docs-label', 'experience-docs');
             toggleUploadField('contributions', 'contributions-docs-label', 'contributions-docs');
             toggleUploadField('other-evidence', 'other-evidence-docs-label', 'other-evidence-docs');
-            toggleUploadField('exhibitions', 'exhibitions-docs-label', 'exhibitions-docs');
             questionarioSecao5Form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const experience = document.getElementById('experience').value;
                 const contributions = document.getElementById('contributions').value;
                 const otherEvidence = document.getElementById('other-evidence').value;
-                const exhibitions = document.getElementById('exhibitions').value;
 
                 const formData = new FormData();
                 const experienceDocs = document.getElementById('experience-docs').files;
                 const contributionsDocs = document.getElementById('contributions-docs').files;
                 const otherEvidenceDocs = document.getElementById('other-evidence-docs').files;
-                const exhibitionsDocs = document.getElementById('exhibitions-docs').files;
                 for (let i = 0; i < experienceDocs.length; i++) {
                     formData.append('experience-docs', experienceDocs[i]);
                 }
@@ -953,9 +802,6 @@
                 for (let i = 0; i < otherEvidenceDocs.length; i++) {
                     formData.append('other-evidence-docs', otherEvidenceDocs[i]);
                 }
-                for (let i = 0; i < exhibitionsDocs.length; i++) {
-                    formData.append('exhibitions-docs', exhibitionsDocs[i]);
-                }
 
                 const currentUser = JSON.parse(localStorage.getItem('currentUser'));
                 const clienteIndex = clientes.findIndex(c => c.email === currentUser.email);
@@ -964,12 +810,10 @@
                     clientes[clienteIndex].experience = experience;
                     clientes[clienteIndex].contributions = contributions;
                     clientes[clienteIndex].otherEvidence = otherEvidence;
-                    clientes[clienteIndex].exhibitions = exhibitions;
                     clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
                         Array.from(formData.getAll('experience-docs')).map(file => file.name),
                         Array.from(formData.getAll('contributions-docs')).map(file => file.name),
-                        Array.from(formData.getAll('other-evidence-docs')).map(file => file.name),
-                        Array.from(formData.getAll('exhibitions-docs')).map(file => file.name)
+                        Array.from(formData.getAll('other-evidence-docs')).map(file => file.name)
                     );
                     saveClientes();
                     localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
@@ -1019,17 +863,23 @@
         const questionarioSecao7Form = document.getElementById('questionarioSecao7Form');
         if (questionarioSecao7Form) {
             toggleUploadField('high-salary', 'high-salary-docs-label', 'high-salary-docs');
+            toggleUploadField('artistic-exhibitions', 'artistic-exhibitions-docs-label', 'artistic-exhibitions-docs');
             toggleUploadField('commercial-success', 'commercial-success-docs-label', 'commercial-success-docs');
             questionarioSecao7Form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const highSalary = document.getElementById('high-salary').value;
+                const artisticExhibitions = document.getElementById('artistic-exhibitions').value;
                 const commercialSuccess = document.getElementById('commercial-success').value;
 
                 const formData = new FormData();
                 const highSalaryDocs = document.getElementById('high-salary-docs').files;
+                const artisticExhibitionsDocs = document.getElementById('artistic-exhibitions-docs').files;
                 const commercialSuccessDocs = document.getElementById('commercial-success-docs').files;
                 for (let i = 0; i < highSalaryDocs.length; i++) {
                     formData.append('high-salary-docs', highSalaryDocs[i]);
+                }
+                for (let i = 0; i < artisticExhibitionsDocs.length; i++) {
+                    formData.append('artistic-exhibitions-docs', artisticExhibitionsDocs[i]);
                 }
                 for (let i = 0; i < commercialSuccessDocs.length; i++) {
                     formData.append('commercial-success-docs', commercialSuccessDocs[i]);
@@ -1048,38 +898,40 @@
 
                 if (clienteIndex !== -1) {
                     clientes[clienteIndex].highSalary = highSalary;
+                    clientes[clienteIndex].artisticExhibitions = artisticExhibitions;
                     clientes[clienteIndex].commercialSuccess = commercialSuccess;
                     clientes[clienteIndex].documents = clientes[clienteIndex].documents.concat(
                         Array.from(formData.getAll('high-salary-docs')).map(file => file.name),
+                        Array.from(formData.getAll('artistic-exhibitions-docs')).map(file => file.name),
                         Array.from(formData.getAll('commercial-success-docs')).map(file => file.name)
                     );
 
                     // Calcular pontuação para cada visto
                     let eb2niwCriteria = 0;
-                    if (clientes[clienteIndex].awards === "Sim" || clientes[clienteIndex].professionalRecognition === "Sim") eb2niwCriteria++; // Prêmios ou reconhecimentos
+                    if (clientes[clienteIndex].awards === "Sim") eb2niwCriteria++;
                     if (clientes[clienteIndex].memberships === "Sim") eb2niwCriteria++;
                     if (clientes[clienteIndex].highSalary === "Sim") eb2niwCriteria++;
                     if (clientes[clienteIndex].experience === "Sim") eb2niwCriteria++;
                     if (clientes[clienteIndex].license === "Sim") eb2niwCriteria++;
                     if (clientes[clienteIndex].otherEvidence === "Sim") eb2niwCriteria++;
-                    if (clientes[clienteIndex].formacaoAcademica !== "EnsinoFundamental" && clientes[clienteIndex].formacaoAcademica !== "EnsinoMedio") eb2niwCriteria++;
+                    if (clientes[clienteIndex].formacaoAcademica !== "EnsinoFundamental" && clientes[clienteIndex].formacaoAcademica !== "EnsinoMedio") eb2niwCriteria++; // Registro acadêmico
                     clientes[clienteIndex].eb2niwEligibility = `Cumpre ${eb2niwCriteria}/7 critérios objetivos`;
 
                     let eb1aCriteria = 0;
-                    if (clientes[clienteIndex].awards === "Sim" || clientes[clienteIndex].professionalRecognition === "Sim") eb1aCriteria++; // Prêmios ou reconhecimentos
+                    if (clientes[clienteIndex].awards === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].memberships === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].mediaPublications === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].judge === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].contributions === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].academicPublications === "Sim") eb1aCriteria++;
-                    if (clientes[clienteIndex].exhibitions === "Sim") eb1aCriteria++;
+                    if (clientes[clienteIndex].artisticExhibitions === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].leadership === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].highSalary === "Sim") eb1aCriteria++;
                     if (clientes[clienteIndex].commercialSuccess === "Sim") eb1aCriteria++;
                     clientes[clienteIndex].eb1aEligibility = `Cumpre ${eb1aCriteria}/10 critérios objetivos`;
 
                     let o1aCriteria = 0;
-                    if (clientes[clienteIndex].awards === "Sim" || clientes[clienteIndex].professionalRecognition === "Sim") o1aCriteria++; // Prêmios ou reconhecimentos
+                    if (clientes[clienteIndex].awards === "Sim") o1aCriteria++;
                     if (clientes[clienteIndex].memberships === "Sim") o1aCriteria++;
                     if (clientes[clienteIndex].mediaPublications === "Sim") o1aCriteria++;
                     if (clientes[clienteIndex].judge === "Sim") o1aCriteria++;
@@ -1089,30 +941,8 @@
                     if (clientes[clienteIndex].highSalary === "Sim") o1aCriteria++;
                     clientes[clienteIndex].o1aEligibility = `Cumpre ${o1aCriteria}/8 critérios objetivos`;
 
-                    // Atualizar o status do cliente
-                    clientes[clienteIndex].etapa = "Aguardando Análise";
-                    adicionarHistorico(clienteIndex, "Questionário enviado para análise.");
-                    adicionarNotificacao(clienteIndex, "Seu questionário foi enviado e está aguardando análise pela consultoria.");
-
                     saveClientes();
                     localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
-
-                    // Atualizar a página do cliente
-                    document.getElementById('cliente-nome').textContent = clientes[clienteIndex].nome;
-                    document.getElementById('cliente-email').textContent = clientes[clienteIndex].email;
-                    document.getElementById('cliente-telefone').textContent = clientes[clienteIndex].telefone;
-                    document.getElementById('cliente-servico').textContent = clientes[clienteIndex].servico;
-                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndex].etapa;
-                    document.getElementById('preencher-questionario-btn').style.display = "none";
-
-                    const notificacoesList = document.getElementById('cliente-notificacoes');
-                    notificacoesList.innerHTML = '';
-                    clientes[clienteIndex].notificacoes.forEach(notificacao => {
-                        const li = document.createElement('li');
-                        li.textContent = notificacao;
-                        notificacoesList.appendChild(li);
-                    });
-
                     alert(`Dados salvos com sucesso!\n\nResultados de Elegibilidade (Critérios Objetivos):\n- EB-2 NIW: ${clientes[clienteIndex].eb2niwEligibility}\n- EB-1A: ${clientes[clienteIndex].eb1aEligibility}\n- O-1A: ${clientes[clienteIndex].o1aEligibility}`);
                     showPage('cliente');
                 }
@@ -1128,187 +958,31 @@
                 const password = document.getElementById('admin-password').value;
 
                 if (email === adminCredentials.email && password === adminCredentials.password) {
-                    const novoCadastroColumn = document.getElementById('novo-cadastro');
-                    const aguardandoEnvioColumn = document.getElementById('aguardando-envio');
-                    const aguardandoAnaliseColumn = document.getElementById('aguardando-analise');
-                    const analiseConcluidaColumn = document.getElementById('analise-concluida');
-                    const aprovadoColumn = document.getElementById('aprovado');
-                    const rejeitadoColumn = document.getElementById('rejeitado');
-
-                    novoCadastroColumn.innerHTML = '<h3>Novo Cadastro</h3>';
-                    aguardandoEnvioColumn.innerHTML = '<h3>Aguardando Envio de Análise</h3>';
-                    aguardandoAnaliseColumn.innerHTML = '<h3>Aguardando Análise</h3>';
-                    analiseConcluidaColumn.innerHTML = '<h3>Análise Concluída</h3>';
-                    aprovadoColumn.innerHTML = '<h3>Aprovado</h3>';
-                    rejeitadoColumn.innerHTML = '<h3>Rejeitado</h3>';
-
-                    clientes.forEach((cliente, index) => {
-                        const card = document.createElement('div');
-                        card.className = 'kanban-card';
-                        card.innerHTML = `
-                            <p><strong>Nome:</strong> ${cliente.nome}</p>
-                            <p><strong>E-mail:</strong> ${cliente.email}</p>
-                            <button onclick="showClienteDetalhes(${index})">Ver Detalhes</button>
+                    const clientesTable = document.getElementById('clientesTable');
+                    clientesTable.innerHTML = '';
+                    clientes.forEach(cliente => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${cliente.nome}</td>
+                            <td>${cliente.email}</td>
+                            <td>${cliente.telefone}</td>
+                            <td>${cliente.servico}</td>
+                            <td>${cliente.etapa}</td>
+                            <td>${cliente.areaAtuacao || 'Não preenchido'}</td>
+                            <td>${cliente.cargoAtual || 'Não preenchido'}</td>
+                            <td>${cliente.formacaoAcademica || 'Não preenchido'}</td>
+                            <td>${cliente.areaFormacao || 'Não preenchido'}</td>
+                            <td>${cliente.eb2niwEligibility || 'Não avaliado'}</td>
+                            <td>${cliente.eb1aEligibility || 'Não avaliado'}</td>
+                            <td>${cliente.o1aEligibility || 'Não avaliado'}</td>
                         `;
-
-                        if (cliente.etapa === "Novo Cadastro") {
-                            novoCadastroColumn.appendChild(card);
-                        } else if (cliente.etapa === "Aguardando Envio de Análise") {
-                            aguardandoEnvioColumn.appendChild(card);
-                        } else if (cliente.etapa === "Aguardando Análise") {
-                            aguardandoAnaliseColumn.appendChild(card);
-                        } else if (cliente.etapa === "Análise Concluída") {
-                            analiseConcluidaColumn.appendChild(card);
-                        } else if (cliente.etapa === "Aprovado") {
-                            aprovadoColumn.appendChild(card);
-                        } else if (cliente.etapa === "Rejeitado") {
-                            rejeitadoColumn.appendChild(card);
-                        }
+                        clientesTable.appendChild(row);
                     });
-
                     showPage('admin');
                 } else {
                     alert('Credenciais de administrador incorretas!');
                 }
             });
-        }
-
-        // Função para exibir os detalhes do cliente
-        let clienteIndexAtual = null;
-
-        function showClienteDetalhes(clienteIndex) {
-            clienteIndexAtual = clienteIndex;
-            const cliente = clientes[clienteIndex];
-            document.getElementById('detalhes-nome').textContent = cliente.nome;
-            document.getElementById('detalhes-email').textContent = cliente.email;
-            document.getElementById('detalhes-telefone').textContent = cliente.telefone;
-            document.getElementById('detalhes-eb2niw').textContent = cliente.eb2niwEligibility || "Não avaliado";
-            document.getElementById('detalhes-eb1a').textContent = cliente.eb1aEligibility || "Não avaliado";
-            document.getElementById('detalhes-o1a').textContent = cliente.o1aEligibility || "Não avaliado";
-
-            const documentosList = document.getElementById('detalhes-documentos');
-            documentosList.innerHTML = '';
-            if (cliente.documents && cliente.documents.length > 0) {
-                cliente.documents.forEach(doc => {
-                    const li = document.createElement('li');
-                    li.textContent = doc;
-                    documentosList.appendChild(li);
-                });
-            } else {
-                const li = document.createElement('li');
-                li.textContent = "Nenhum documento enviado.";
-                documentosList.appendChild(li);
-            }
-
-            const historicoList = document.getElementById('detalhes-historico');
-            historicoList.innerHTML = '';
-            if (cliente.historico && cliente.historico.length > 0) {
-                cliente.historico.forEach(h => {
-                    const li = document.createElement('li');
-                    li.textContent = h;
-                    historicoList.appendChild(li);
-                });
-            } else {
-                const li = document.createElement('li');
-                li.textContent = "Nenhum histórico registrado.";
-                historicoList.appendChild(li);
-            }
-
-            // Mostrar/esconder botões de ações com base no status
-            const concluirAnaliseBtn = document.getElementById('concluir-analise-btn');
-            const aprovarBtn = document.getElementById('aprovar-btn');
-            const rejeitarBtn = document.getElementById('rejeitar-btn');
-
-            if (cliente.etapa === "Aguardando Análise") {
-                concluirAnaliseBtn.style.display = "block";
-                aprovarBtn.style.display = "none";
-                rejeitarBtn.style.display = "none";
-            } else if (cliente.etapa === "Análise Concluída") {
-                concluirAnaliseBtn.style.display = "none";
-                aprovarBtn.style.display = "block";
-                rejeitarBtn.style.display = "block";
-            } else {
-                concluirAnaliseBtn.style.display = "none";
-                aprovarBtn.style.display = "none";
-                rejeitarBtn.style.display = "none";
-            }
-
-            showPage('cliente-detalhes');
-        }
-
-        // Função para concluir a análise
-        function concluirAnalise() {
-            if (clienteIndexAtual !== null) {
-                clientes[clienteIndexAtual].etapa = "Análise Concluída";
-                adicionarHistorico(clienteIndexAtual, "Análise concluída pela consultoria.");
-                adicionarNotificacao(clienteIndexAtual, "Sua análise foi concluída! Aguarde a decisão final.");
-                saveClientes();
-
-                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                if (currentUser.email === clientes[clienteIndexAtual].email) {
-                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
-                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
-                    const notificacoesList = document.getElementById('cliente-notificacoes');
-                    notificacoesList.innerHTML = '';
-                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
-                        const li = document.createElement('li');
-                        li.textContent = notificacao;
-                        notificacoesList.appendChild(li);
-                    });
-                }
-
-                showClienteDetalhes(clienteIndexAtual);
-            }
-        }
-
-        // Função para aprovar o cliente
-        function aprovarCliente() {
-            if (clienteIndexAtual !== null) {
-                clientes[clienteIndexAtual].etapa = "Aprovado";
-                adicionarHistorico(clienteIndexAtual, "Cliente aprovado para o visto.");
-                adicionarNotificacao(clienteIndexAtual, "Parabéns! Seu pedido foi aprovado para o visto!");
-                saveClientes();
-
-                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                if (currentUser.email === clientes[clienteIndexAtual].email) {
-                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
-                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
-                    const notificacoesList = document.getElementById('cliente-notificacoes');
-                    notificacoesList.innerHTML = '';
-                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
-                        const li = document.createElement('li');
-                        li.textContent = notificacao;
-                        notificacoesList.appendChild(li);
-                    });
-                }
-
-                showClienteDetalhes(clienteIndexAtual);
-            }
-        }
-
-        // Função para rejeitar o cliente
-        function rejeitarCliente() {
-            if (clienteIndexAtual !== null) {
-                clientes[clienteIndexAtual].etapa = "Rejeitado";
-                adicionarHistorico(clienteIndexAtual, "Cliente rejeitado para o visto.");
-                adicionarNotificacao(clienteIndexAtual, "Infelizmente, seu pedido foi rejeitado. Entre em contato para mais detalhes.");
-                saveClientes();
-
-                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                if (currentUser.email === clientes[clienteIndexAtual].email) {
-                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
-                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
-                    const notificacoesList = document.getElementById('cliente-notificacoes');
-                    notificacoesList.innerHTML = '';
-                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
-                        const li = document.createElement('li');
-                        li.textContent = notificacao;
-                        notificacoesList.appendChild(li);
-                    });
-                }
-
-                showClienteDetalhes(clienteIndexAtual);
-            }
         }
     </script>
 </body>
