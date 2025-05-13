@@ -16,7 +16,7 @@
             min-height: 100vh;
         }
 
-        .container, .login-container, .cliente-container, .admin-container, .questionario-container {
+        .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
             background-color: #1a2526;
             padding: 2rem;
             border-radius: 10px;
@@ -35,7 +35,7 @@
             font-size: 1.5rem;
         }
 
-        .options button, form button {
+        .options button, form button, .kanban-card button {
             background-color: #f5c518;
             color: black;
             padding: 0.75rem 1.5rem;
@@ -48,7 +48,7 @@
             min-width: 150px;
         }
 
-        .options button:hover, form button:hover {
+        .options button:hover, form button:hover, .kanban-card button:hover {
             background-color: #e0b000;
         }
 
@@ -90,28 +90,82 @@
             text-decoration: underline;
         }
 
-        .cliente-info, .etapa-info {
+        .cliente-info, .etapa-info, .notificacoes-info {
             margin: 1rem 0;
             text-align: left;
         }
 
-        table {
+        .kanban {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem;
             width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
+            box-sizing: border-box;
+        }
+
+        .kanban-column {
+            flex: 0 0 250px;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 300px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .kanban-column h3 {
+            margin: 0 0 1rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            text-align: center;
+            color: white;
+        }
+
+        /* Cores para cada coluna */
+        #novo-cadastro { background-color: #2c3e50; }
+        #novo-cadastro h3 { background-color: #34495e; }
+        #aguardando-envio { background-color: #2980b9; }
+        #aguardando-envio h3 { background-color: #3498db; }
+        #aguardando-analise { background-color: #8e44ad; }
+        #aguardando-analise h3 { background-color: #9b59b6; }
+        #analise-concluida { background-color: #d35400; }
+        #analise-concluida h3 { background-color: #e67e22; }
+        #aprovado { background-color: #27ae60; }
+        #aprovado h3 { background-color: #2ecc71; }
+        #rejeitado { background-color: #c0392b; }
+        #rejeitado h3 { background-color: #e74c3c; }
+
+        .kanban-card {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kanban-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .kanban-card p {
+            margin: 0.3rem 0;
             font-size: 0.9rem;
         }
 
-        th, td {
-            padding: 0.5rem;
-            border: 1px solid #f5c518;
-            text-align: left;
-            word-wrap: break-word;
-        }
-
-        th {
+        .kanban-card button {
             background-color: #f5c518;
             color: black;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            min-width: 100px;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .kanban-card button:hover {
+            background-color: #e0b000;
         }
 
         .hidden {
@@ -120,7 +174,7 @@
 
         /* Media Queries para Responsividade */
         @media (max-width: 600px) {
-            .container, .login-container, .cliente-container, .admin-container, .questionario-container {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
                 padding: 1rem;
                 width: 95%;
                 min-width: 280px;
@@ -130,7 +184,7 @@
                 font-size: 1.2rem;
             }
 
-            .options button, form button {
+            .options button, form button, .kanban-card button {
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
                 min-width: 120px;
@@ -140,17 +194,17 @@
                 font-size: 0.9rem;
             }
 
-            table {
-                font-size: 0.8rem;
+            .kanban-column {
+                flex: 0 0 200px;
             }
 
-            th, td {
-                padding: 0.3rem;
+            .kanban-card p {
+                font-size: 0.8rem;
             }
         }
 
         @media (min-width: 601px) and (max-width: 1024px) {
-            .container, .login-container, .cliente-container, .admin-container, .questionario-container {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
                 width: 80%;
                 max-width: 700px;
             }
@@ -159,7 +213,7 @@
                 font-size: 1.4rem;
             }
 
-            .options button, form button {
+            .options button, form button, .kanban-card button {
                 padding: 0.6rem 1.2rem;
                 font-size: 1rem;
             }
@@ -167,14 +221,10 @@
             label, input, select, p {
                 font-size: 1rem;
             }
-
-            table {
-                font-size: 0.9rem;
-            }
         }
 
         @media (min-width: 1025px) {
-            .container, .login-container, .cliente-container, .admin-container, .questionario-container {
+            .container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container {
                 width: 70%;
                 max-width: 800px;
             }
@@ -183,17 +233,13 @@
                 font-size: 1.6rem;
             }
 
-            .options button, form button {
+            .options button, form button, .kanban-card button {
                 padding: 0.75rem 1.5rem;
                 font-size: 1.1rem;
             }
 
             label, input, select, p {
                 font-size: 1.1rem;
-            }
-
-            table {
-                font-size: 1rem;
             }
         }
     </style>
@@ -269,7 +315,11 @@
             <p><strong>Serviço Contratado:</strong> <span id="cliente-servico"></span></p>
             <p><strong>Etapa:</strong> <span id="cliente-etapa"></span></p>
         </div>
-        <button onclick="showPage('questionario')">Preencher Questionário de Elegibilidade</button>
+        <div class="notificacoes-info">
+            <h3>Notificações</h3>
+            <ul id="cliente-notificacoes"></ul>
+        </div>
+        <button id="preencher-questionario-btn" onclick="showPage('questionario')">Preencher Questionário de Elegibilidade</button>
         <button onclick="showPage('login')">Sair</button>
     </div>
 
@@ -515,36 +565,70 @@
         <button onclick="showPage('questionario-secao6')">Voltar</button>
     </div>
 
-    <!-- Área do Administrador -->
+    <!-- Área do Administrador (Kanban) -->
     <div id="admin" class="admin-container hidden">
         <h1>Unlocked</h1>
-        <h2>American Visa - Área do Administrador</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th>Serviço Contratado</th>
-                    <th>Etapa</th>
-                    <th>Área de Atuação</th>
-                    <th>Cargo Atual</th>
-                    <th>Formação Acadêmica</th>
-                    <th>Área de Formação</th>
-                    <th>Elegibilidade EB-2 NIW</th>
-                    <th>Elegibilidade EB-1A</th>
-                    <th>Elegibilidade O-1A</th>
-                </tr>
-            </thead>
-            <tbody id="clientesTable"></tbody>
-        </table>
+        <h2>American Visa - CRM de Clientes</h2>
+        <div class="kanban">
+            <div class="kanban-column" id="novo-cadastro">
+                <h3>Novo Cadastro</h3>
+            </div>
+            <div class="kanban-column" id="aguardando-envio">
+                <h3>Aguardando Envio de Análise</h3>
+            </div>
+            <div class="kanban-column" id="aguardando-analise">
+                <h3>Aguardando Análise</h3>
+            </div>
+            <div class="kanban-column" id="analise-concluida">
+                <h3>Análise Concluída</h3>
+            </div>
+            <div class="kanban-column" id="aprovado">
+                <h3>Aprovado</h3>
+            </div>
+            <div class="kanban-column" id="rejeitado">
+                <h3>Rejeitado</h3>
+            </div>
+        </div>
         <button onclick="showPage('login')">Sair</button>
+    </div>
+
+    <!-- Página de Detalhes do Cliente -->
+    <div id="cliente-detalhes" class="cliente-detalhes-container hidden">
+        <h1>Unlocked</h1>
+        <h2>American Visa - Detalhes do Cliente</h2>
+        <div class="cliente-info">
+            <h3>Dados Pessoais</h3>
+            <p><strong>Nome:</strong> <span id="detalhes-nome"></span></p>
+            <p><strong>E-mail:</strong> <span id="detalhes-email"></span></p>
+            <p><strong>Telefone:</strong> <span id="detalhes-telefone"></span></p>
+        </div>
+        <div class="etapa-info">
+            <h3>Elegibilidade</h3>
+            <p><strong>EB-2 NIW:</strong> <span id="detalhes-eb2niw"></span></p>
+            <p><strong>EB-1A:</strong> <span id="detalhes-eb1a"></span></p>
+            <p><strong>O-1A:</strong> <span id="detalhes-o1a"></span></p>
+        </div>
+        <div class="documentos-info">
+            <h3>Documentos Enviados</h3>
+            <ul id="detalhes-documentos"></ul>
+        </div>
+        <div class="historico-info">
+            <h3>Histórico de Interações</h3>
+            <ul id="detalhes-historico"></ul>
+        </div>
+        <div class="acoes">
+            <h3>Ações</h3>
+            <button id="concluir-analise-btn" onclick="concluirAnalise()">Concluir Análise</button>
+            <button id="aprovar-btn" onclick="aprovarCliente()">Aprovar</button>
+            <button id="rejeitar-btn" onclick="rejeitarCliente()">Rejeitar</button>
+        </div>
+        <button onclick="showPage('admin')">Voltar</button>
     </div>
 
     <script>
         // Função para alternar entre as páginas
         function showPage(pageId) {
-            const pages = document.querySelectorAll('.container, .login-container, .cliente-container, .admin-container, .questionario-container');
+            const pages = document.querySelectorAll('.container, .login-container, .cliente-container, .admin-container, .questionario-container, .cliente-detalhes-container');
             pages.forEach(page => page.classList.add('hidden'));
             document.getElementById(pageId).classList.remove('hidden');
         }
@@ -564,7 +648,7 @@
                     label.style.display = "none";
                     input.style.display = "none";
                     input.removeAttribute("required");
-                    input.value = ""; // Limpa o campo se a resposta for "Não"
+                    input.value = "";
                 }
             });
         }
@@ -576,6 +660,20 @@
         // Função para salvar clientes no localStorage
         function saveClientes() {
             localStorage.setItem('clientes', JSON.stringify(clientes));
+        }
+
+        // Função para adicionar uma entrada ao histórico do cliente
+        function adicionarHistorico(clienteIndex, mensagem) {
+            const data = new Date().toLocaleString();
+            clientes[clienteIndex].historico.push(`${data}: ${mensagem}`);
+            saveClientes();
+        }
+
+        // Função para adicionar uma notificação ao cliente
+        function adicionarNotificacao(clienteIndex, mensagem) {
+            const data = new Date().toLocaleString();
+            clientes[clienteIndex].notificacoes.push(`${data}: ${mensagem}`);
+            saveClientes();
         }
 
         // Cadastro
@@ -594,7 +692,7 @@
                     telefone,
                     password,
                     servico: "American Visa",
-                    etapa: "Iniciado",
+                    etapa: "Novo Cadastro",
                     areaAtuacao: "",
                     cargoAtual: "",
                     formacaoAcademica: "",
@@ -612,10 +710,17 @@
                     experience: "",
                     license: "",
                     otherEvidence: "",
-                    documents: []
+                    documents: [],
+                    eb2niwEligibility: "",
+                    eb1aEligibility: "",
+                    o1aEligibility: "",
+                    historico: [],
+                    notificacoes: []
                 };
 
                 clientes.push(novoCliente);
+                adicionarHistorico(clientes.length - 1, "Cliente cadastrado.");
+                adicionarNotificacao(clientes.length - 1, "Bem-vindo(a) ao Unlocked - American Visa! Por favor, preencha o questionário de elegibilidade.");
                 saveClientes();
                 localStorage.setItem('currentUser', JSON.stringify(novoCliente));
                 document.getElementById('cliente-nome').textContent = novoCliente.nome;
@@ -623,6 +728,16 @@
                 document.getElementById('cliente-telefone').textContent = novoCliente.telefone;
                 document.getElementById('cliente-servico').textContent = novoCliente.servico;
                 document.getElementById('cliente-etapa').textContent = novoCliente.etapa;
+                document.getElementById('preencher-questionario-btn').style.display = "block";
+
+                const notificacoesList = document.getElementById('cliente-notificacoes');
+                notificacoesList.innerHTML = '';
+                novoCliente.notificacoes.forEach(notificacao => {
+                    const li = document.createElement('li');
+                    li.textContent = notificacao;
+                    notificacoesList.appendChild(li);
+                });
+
                 alert('Cadastro realizado com sucesso!');
                 showPage('cliente');
             });
@@ -638,12 +753,23 @@
 
                 const cliente = clientes.find(c => c.email === email && c.password === password);
                 if (cliente) {
+                    const clienteIndex = clientes.findIndex(c => c.email === email);
                     localStorage.setItem('currentUser', JSON.stringify(cliente));
                     document.getElementById('cliente-nome').textContent = cliente.nome;
                     document.getElementById('cliente-email').textContent = cliente.email;
                     document.getElementById('cliente-telefone').textContent = cliente.telefone;
                     document.getElementById('cliente-servico').textContent = cliente.servico;
                     document.getElementById('cliente-etapa').textContent = cliente.etapa;
+                    document.getElementById('preencher-questionario-btn').style.display = cliente.etapa === "Novo Cadastro" || cliente.etapa === "Aguardando Envio de Análise" ? "block" : "none";
+
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    cliente.notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+
                     showPage('cliente');
                 } else {
                     alert('E-mail ou senha incorretos!');
@@ -669,6 +795,8 @@
                     clientes[clienteIndex].cargoAtual = cargoAtual;
                     clientes[clienteIndex].formacaoAcademica = formacaoAcademica;
                     clientes[clienteIndex].areaFormacao = areaFormacao;
+                    clientes[clienteIndex].etapa = "Aguardando Envio de Análise";
+                    adicionarHistorico(clienteIndex, "Cliente começou a preencher o questionário de elegibilidade.");
                     saveClientes();
                     localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
                     showPage('questionario-secao2');
@@ -914,7 +1042,7 @@
                     if (clientes[clienteIndex].experience === "Sim") eb2niwCriteria++;
                     if (clientes[clienteIndex].license === "Sim") eb2niwCriteria++;
                     if (clientes[clienteIndex].otherEvidence === "Sim") eb2niwCriteria++;
-                    if (clientes[clienteIndex].formacaoAcademica !== "EnsinoFundamental" && clientes[clienteIndex].formacaoAcademica !== "EnsinoMedio") eb2niwCriteria++; // Registro acadêmico
+                    if (clientes[clienteIndex].formacaoAcademica !== "EnsinoFundamental" && clientes[clienteIndex].formacaoAcademica !== "EnsinoMedio") eb2niwCriteria++;
                     clientes[clienteIndex].eb2niwEligibility = `Cumpre ${eb2niwCriteria}/7 critérios objetivos`;
 
                     let eb1aCriteria = 0;
@@ -941,8 +1069,30 @@
                     if (clientes[clienteIndex].highSalary === "Sim") o1aCriteria++;
                     clientes[clienteIndex].o1aEligibility = `Cumpre ${o1aCriteria}/8 critérios objetivos`;
 
+                    // Atualizar o status do cliente
+                    clientes[clienteIndex].etapa = "Aguardando Análise";
+                    adicionarHistorico(clienteIndex, "Questionário enviado para análise.");
+                    adicionarNotificacao(clienteIndex, "Seu questionário foi enviado e está aguardando análise pela consultoria.");
+
                     saveClientes();
                     localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndex]));
+
+                    // Atualizar a página do cliente
+                    document.getElementById('cliente-nome').textContent = clientes[clienteIndex].nome;
+                    document.getElementById('cliente-email').textContent = clientes[clienteIndex].email;
+                    document.getElementById('cliente-telefone').textContent = clientes[clienteIndex].telefone;
+                    document.getElementById('cliente-servico').textContent = clientes[clienteIndex].servico;
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndex].etapa;
+                    document.getElementById('preencher-questionario-btn').style.display = "none";
+
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndex].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+
                     alert(`Dados salvos com sucesso!\n\nResultados de Elegibilidade (Critérios Objetivos):\n- EB-2 NIW: ${clientes[clienteIndex].eb2niwEligibility}\n- EB-1A: ${clientes[clienteIndex].eb1aEligibility}\n- O-1A: ${clientes[clienteIndex].o1aEligibility}`);
                     showPage('cliente');
                 }
@@ -958,31 +1108,187 @@
                 const password = document.getElementById('admin-password').value;
 
                 if (email === adminCredentials.email && password === adminCredentials.password) {
-                    const clientesTable = document.getElementById('clientesTable');
-                    clientesTable.innerHTML = '';
-                    clientes.forEach(cliente => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${cliente.nome}</td>
-                            <td>${cliente.email}</td>
-                            <td>${cliente.telefone}</td>
-                            <td>${cliente.servico}</td>
-                            <td>${cliente.etapa}</td>
-                            <td>${cliente.areaAtuacao || 'Não preenchido'}</td>
-                            <td>${cliente.cargoAtual || 'Não preenchido'}</td>
-                            <td>${cliente.formacaoAcademica || 'Não preenchido'}</td>
-                            <td>${cliente.areaFormacao || 'Não preenchido'}</td>
-                            <td>${cliente.eb2niwEligibility || 'Não avaliado'}</td>
-                            <td>${cliente.eb1aEligibility || 'Não avaliado'}</td>
-                            <td>${cliente.o1aEligibility || 'Não avaliado'}</td>
+                    const novoCadastroColumn = document.getElementById('novo-cadastro');
+                    const aguardandoEnvioColumn = document.getElementById('aguardando-envio');
+                    const aguardandoAnaliseColumn = document.getElementById('aguardando-analise');
+                    const analiseConcluidaColumn = document.getElementById('analise-concluida');
+                    const aprovadoColumn = document.getElementById('aprovado');
+                    const rejeitadoColumn = document.getElementById('rejeitado');
+
+                    novoCadastroColumn.innerHTML = '<h3>Novo Cadastro</h3>';
+                    aguardandoEnvioColumn.innerHTML = '<h3>Aguardando Envio de Análise</h3>';
+                    aguardandoAnaliseColumn.innerHTML = '<h3>Aguardando Análise</h3>';
+                    analiseConcluidaColumn.innerHTML = '<h3>Análise Concluída</h3>';
+                    aprovadoColumn.innerHTML = '<h3>Aprovado</h3>';
+                    rejeitadoColumn.innerHTML = '<h3>Rejeitado</h3>';
+
+                    clientes.forEach((cliente, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'kanban-card';
+                        card.innerHTML = `
+                            <p><strong>Nome:</strong> ${cliente.nome}</p>
+                            <p><strong>E-mail:</strong> ${cliente.email}</p>
+                            <button onclick="showClienteDetalhes(${index})">Ver Detalhes</button>
                         `;
-                        clientesTable.appendChild(row);
+
+                        if (cliente.etapa === "Novo Cadastro") {
+                            novoCadastroColumn.appendChild(card);
+                        } else if (cliente.etapa === "Aguardando Envio de Análise") {
+                            aguardandoEnvioColumn.appendChild(card);
+                        } else if (cliente.etapa === "Aguardando Análise") {
+                            aguardandoAnaliseColumn.appendChild(card);
+                        } else if (cliente.etapa === "Análise Concluída") {
+                            analiseConcluidaColumn.appendChild(card);
+                        } else if (cliente.etapa === "Aprovado") {
+                            aprovadoColumn.appendChild(card);
+                        } else if (cliente.etapa === "Rejeitado") {
+                            rejeitadoColumn.appendChild(card);
+                        }
                     });
+
                     showPage('admin');
                 } else {
                     alert('Credenciais de administrador incorretas!');
                 }
             });
+        }
+
+        // Função para exibir os detalhes do cliente
+        let clienteIndexAtual = null;
+
+        function showClienteDetalhes(clienteIndex) {
+            clienteIndexAtual = clienteIndex;
+            const cliente = clientes[clienteIndex];
+            document.getElementById('detalhes-nome').textContent = cliente.nome;
+            document.getElementById('detalhes-email').textContent = cliente.email;
+            document.getElementById('detalhes-telefone').textContent = cliente.telefone;
+            document.getElementById('detalhes-eb2niw').textContent = cliente.eb2niwEligibility || "Não avaliado";
+            document.getElementById('detalhes-eb1a').textContent = cliente.eb1aEligibility || "Não avaliado";
+            document.getElementById('detalhes-o1a').textContent = cliente.o1aEligibility || "Não avaliado";
+
+            const documentosList = document.getElementById('detalhes-documentos');
+            documentosList.innerHTML = '';
+            if (cliente.documents && cliente.documents.length > 0) {
+                cliente.documents.forEach(doc => {
+                    const li = document.createElement('li');
+                    li.textContent = doc;
+                    documentosList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = "Nenhum documento enviado.";
+                documentosList.appendChild(li);
+            }
+
+            const historicoList = document.getElementById('detalhes-historico');
+            historicoList.innerHTML = '';
+            if (cliente.historico && cliente.historico.length > 0) {
+                cliente.historico.forEach(h => {
+                    const li = document.createElement('li');
+                    li.textContent = h;
+                    historicoList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = "Nenhum histórico registrado.";
+                historicoList.appendChild(li);
+            }
+
+            // Mostrar/esconder botões de ações com base no status
+            const concluirAnaliseBtn = document.getElementById('concluir-analise-btn');
+            const aprovarBtn = document.getElementById('aprovar-btn');
+            const rejeitarBtn = document.getElementById('rejeitar-btn');
+
+            if (cliente.etapa === "Aguardando Análise") {
+                concluirAnaliseBtn.style.display = "block";
+                aprovarBtn.style.display = "none";
+                rejeitarBtn.style.display = "none";
+            } else if (cliente.etapa === "Análise Concluída") {
+                concluirAnaliseBtn.style.display = "none";
+                aprovarBtn.style.display = "block";
+                rejeitarBtn.style.display = "block";
+            } else {
+                concluirAnaliseBtn.style.display = "none";
+                aprovarBtn.style.display = "none";
+                rejeitarBtn.style.display = "none";
+            }
+
+            showPage('cliente-detalhes');
+        }
+
+        // Função para concluir a análise
+        function concluirAnalise() {
+            if (clienteIndexAtual !== null) {
+                clientes[clienteIndexAtual].etapa = "Análise Concluída";
+                adicionarHistorico(clienteIndexAtual, "Análise concluída pela consultoria.");
+                adicionarNotificacao(clienteIndexAtual, "Sua análise foi concluída! Aguarde a decisão final.");
+                saveClientes();
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser.email === clientes[clienteIndexAtual].email) {
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+                }
+
+                showClienteDetalhes(clienteIndexAtual);
+            }
+        }
+
+        // Função para aprovar o cliente
+        function aprovarCliente() {
+            if (clienteIndexAtual !== null) {
+                clientes[clienteIndexAtual].etapa = "Aprovado";
+                adicionarHistorico(clienteIndexAtual, "Cliente aprovado para o visto.");
+                adicionarNotificacao(clienteIndexAtual, "Parabéns! Seu pedido foi aprovado para o visto!");
+                saveClientes();
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser.email === clientes[clienteIndexAtual].email) {
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+                }
+
+                showClienteDetalhes(clienteIndexAtual);
+            }
+        }
+
+        // Função para rejeitar o cliente
+        function rejeitarCliente() {
+            if (clienteIndexAtual !== null) {
+                clientes[clienteIndexAtual].etapa = "Rejeitado";
+                adicionarHistorico(clienteIndexAtual, "Cliente rejeitado para o visto.");
+                adicionarNotificacao(clienteIndexAtual, "Infelizmente, seu pedido foi rejeitado. Entre em contato para mais detalhes.");
+                saveClientes();
+
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser.email === clientes[clienteIndexAtual].email) {
+                    localStorage.setItem('currentUser', JSON.stringify(clientes[clienteIndexAtual]));
+                    document.getElementById('cliente-etapa').textContent = clientes[clienteIndexAtual].etapa;
+                    const notificacoesList = document.getElementById('cliente-notificacoes');
+                    notificacoesList.innerHTML = '';
+                    clientes[clienteIndexAtual].notificacoes.forEach(notificacao => {
+                        const li = document.createElement('li');
+                        li.textContent = notificacao;
+                        notificacoesList.appendChild(li);
+                    });
+                }
+
+                showClienteDetalhes(clienteIndexAtual);
+            }
         }
     </script>
 </body>
